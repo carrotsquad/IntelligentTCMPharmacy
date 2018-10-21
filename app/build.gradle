@@ -62,7 +62,7 @@ dependencies {
     //Panel库
     implementation 'com.github.florent37:expansionpanel:1.1.1'
     //时间选择库
-    
+    implementation 'com.contrarywind:Android-PickerView:4.1.6'
     //断电下载库
     implementation 'com.mindorks.android:prdownloader:0.4.0'
 }
