@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/log_in_bg"
-    tools:context="com.zxr.medicalaid.mvp.ui.activities.LoginActivity">
+    tools:context="com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"

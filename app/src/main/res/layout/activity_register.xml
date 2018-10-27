@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/log_in_bg"
-    tools:context="com.zxr.medicalaid.mvp.ui.activities.RegisterActivity">
+    tools:context="com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.RegisterActivity">
 
 
     <android.support.constraint.Guideline
@@ -100,6 +100,7 @@
                 android:textSize="@dimen/font_large" />
 
             <RadioGroup
+                android:id="@+id/select_identify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
