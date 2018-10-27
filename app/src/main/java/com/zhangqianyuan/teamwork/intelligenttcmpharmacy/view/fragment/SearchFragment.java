@@ -11,7 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.ISearchFragment;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.IBaseView;
+
 
 /**
  * Description: 搜索fragment
@@ -20,7 +21,7 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.ISearch
  * Email: zhang.qianyuan@foxmail.com
  */
 // TODO: 2018/10/21 搜索功能，和服务器结合
-public class SearchFragment extends Fragment implements ISearchFragment {
+public class SearchFragment extends Fragment implements IBaseView {
 
 
     private View view;
@@ -61,8 +62,9 @@ public class SearchFragment extends Fragment implements ISearchFragment {
         return context;
     }
 
+
     @Override
-    public void showMedecineInfo(String resulttext, Boolean issucced) {
+    public void showInfo(Object object, Boolean issucced) {
 
     }
 }

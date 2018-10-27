@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.network.AllUri.BaseUrl;
 
 /**
- * Description: 基础Model每个Model都须继承
+ * Description: 基础Model每个Model都须继承,有需要的话iBaseListener可以向下转型
  * Created at: 2018/10/27 18:40
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
