@@ -18,6 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     private void initView(){
 
         List<Fragment> fragments = new ArrayList<>();
+        fragments.add(SearchFragment.newInstance());
+        fragments.add(SearchFragment.newInstance());
         fragments.add(SearchFragment.newInstance());
 
         MainViewAdapter mainViewAdapter = new MainViewAdapter(getSupportFragmentManager());
