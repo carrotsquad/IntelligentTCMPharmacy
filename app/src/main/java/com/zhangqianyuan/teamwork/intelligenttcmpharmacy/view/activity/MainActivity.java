@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.adapter.MainViewAdapter;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.PersonFragment;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.SearchFragment;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(SearchFragment.newInstance());
         fragments.add(SearchFragment.newInstance());
-        fragments.add(SearchFragment.newInstance());
+        fragments.add(new PersonFragment());
 
         MainViewAdapter mainViewAdapter = new MainViewAdapter(getSupportFragmentManager());
 
@@ -86,13 +87,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 mTitleTv.setText(titles[position]);
-                if(prevMenuItem != null){
-                    prevMenuItem.setChecked(false);
-                }else {
-                    mBottomNav.getMenu().getItem(0).setChecked(false);
-                }
                 mBottomNav.getMenu().getItem(position).setChecked(true);
-                prevMenuItem = mBottomNav.getMenu().getItem(position);
             }
 
             @Override
