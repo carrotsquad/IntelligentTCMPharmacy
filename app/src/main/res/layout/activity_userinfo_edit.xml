@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
@@ -18,7 +16,8 @@
             android:id="@+id/toolbar"
             app:theme="@style/WhiteToolbarStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.Toolbar>
+            android:layout_height="match_parent">
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
@@ -45,7 +44,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/more" />
 
-        <com.zxr.medicalaid.widget.CircleImageView
+        <com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.CircleImageView
             android:id="@+id/circleImageView"
             android:layout_width="@dimen/image_size_small"
             android:layout_height="@dimen/image_size_small"

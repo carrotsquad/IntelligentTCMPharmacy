@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.IBaseView;
+
 
 /**
  * Description: 搜索fragment
@@ -19,7 +21,8 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
  * Email: zhang.qianyuan@foxmail.com
  */
 // TODO: 2018/10/21 搜索功能，和服务器结合
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements IBaseView {
+
 
     private View view;
     private Context context;
@@ -32,7 +35,7 @@ public class SearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_personage, null);
+        view = inflater.inflate(R.layout.fragment_search, null);
         context = getContext();
 
         initView();
@@ -50,6 +53,18 @@ public class SearchFragment extends Fragment {
     }
 
     private void initView(){
+
+    }
+
+    @Nullable
+    @Override
+    public Context getContext() {
+        return context;
+    }
+
+
+    @Override
+    public void showInfo(Object object, Boolean issucced) {
 
     }
 }

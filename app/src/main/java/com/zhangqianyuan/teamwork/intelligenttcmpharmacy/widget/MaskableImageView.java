@@ -1,11 +1,13 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.ColorMatrixColorFilter;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-public class MaskableImageView extends ImageView {
+
+public class MaskableImageView extends android.support.v7.widget.AppCompatImageView {
   
     private boolean touchEffect = true;  
     public final float[] BG_PRESSED = new float[] { 1, 0, 0, 0, -50, 0, 1,  
