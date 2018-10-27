@@ -4,8 +4,7 @@ import android.content.Context;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.model.MedecineModel;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.model.listener.IBaseListener;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.ISearchFragment;
-
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.IBaseView;
 
 // TODO: 2018/10/27 需要完善
 /**
@@ -16,10 +15,10 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.ISearch
  */
 public class MedicineSearchPresenter implements IBasePresenter {
 
-    private ISearchFragment iSearchFragment;
+    private IBaseView iSearchFragment;
     private MedecineModel medecineModel;
 
-    public MedicineSearchPresenter(ISearchFragment iSearchFragment){
+    public MedicineSearchPresenter(IBaseView iSearchFragment){
         this.iSearchFragment = iSearchFragment;
     }
 
@@ -28,7 +27,7 @@ public class MedicineSearchPresenter implements IBasePresenter {
         medecineModel.getInfo(object, iSearchFragment.getActivity(), new IBaseListener() {
             @Override
             public void onSucceed(Object object) {
-                
+
             }
 
             @Override
