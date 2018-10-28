@@ -37,6 +37,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.UserInfoEditActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.UserInfoEditActivity" />
+
+                <category android:name="android.intent.category.UserInfoEditActivity" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.AboutUsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.AboutUsActivity" />
+
+                <category android:name="android.intent.category.AboutUsActivity" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.LoginActivity" />
+
+                <category android:name="android.intent.category.LoginActivity" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

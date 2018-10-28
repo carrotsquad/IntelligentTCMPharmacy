@@ -1,22 +1,41 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.shashank.sony.fancytoastlib.FancyToast;
+import com.squareup.picasso.Picasso;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.CircleImageView;
 
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.galleryfinal.BuildConfig;
+import cn.finalteam.galleryfinal.CoreConfig;
+import cn.finalteam.galleryfinal.FunctionConfig;
+import cn.finalteam.galleryfinal.GalleryFinal;
+import cn.finalteam.galleryfinal.ImageLoader;
+import cn.finalteam.galleryfinal.ThemeConfig;
+import cn.finalteam.galleryfinal.model.PhotoInfo;
+import cn.finalteam.galleryfinal.widget.GFImageView;
 
 /**
  * Description:
@@ -33,6 +52,8 @@ public class UserInfoEditActivity extends AppCompatActivity {
     EditText mUserName;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.expansionLayout)
+
 
     private boolean hasChanged = false;
 
@@ -57,6 +78,7 @@ public class UserInfoEditActivity extends AppCompatActivity {
         mToolbar.setTitleTextColor(Color.WHITE);
         //最开始设置姓名编辑光标不现实
         mUserName.setCursorVisible(false);
+
     }
 
     @Override
@@ -75,9 +97,10 @@ public class UserInfoEditActivity extends AppCompatActivity {
     @OnClick({R.id.head_relative, R.id.name_relative, R.id.log_off, R.id.password_relative,R.id.medical_date_setting_relative, R.id.finish_bt})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.head_relative:
-
+            case R.id.head_relative: {
+                initGallery();
                 break;
+            }
             case R.id.name_relative:
                 mUserName.setCursorVisible(true);
                 mUserName.requestFocus();
@@ -114,6 +137,52 @@ public class UserInfoEditActivity extends AppCompatActivity {
 //                editor.commit();
                 //同时进行一些数据清除，如数据库的清理
                 break;
+                default:{
+                    break;
+                }
         }
     }
+
+    private void initGallery(){
+        //设置主题
+        //ThemeConfig.CYAN
+        ThemeConfig theme = new ThemeConfig.Builder().build();
+        //配置功能
+        FunctionConfig functionConfig = new FunctionConfig.Builder()
+                .setEnableCamera(true)
+                .setEnableEdit(true)
+                .setEnableCrop(true)
+                .setEnableRotate(true)
+                .setCropSquare(true)
+                .setEnablePreview(true)
+                .build();
+
+        //配置imageloader
+        GlideImageLoader imageloader = new GlideImageLoader();
+        CoreConfig coreConfig = new CoreConfig.Builder(UserInfoEditActivity.this, imageloader, theme)
+                .setDebug(BuildConfig.DEBUG)
+                .setFunctionConfig(functionConfig).build();
+        GalleryFinal.init(coreConfig);
+
+        GalleryFinal.openGallerySingle(REQUEST_CODE_GALLERY, mOnHandlerResultCallback);
+    }
+
+    private GalleryFinal.OnHanlderResultCallback mOnHandlerResultCallback = new GalleryFinal.OnHanlderResultCallback() {
+        @Override
+        public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
+            //进行图片上传与置换
+            //置换
+            String photoPath = resultList.get(0).getPhotoPath();
+            mUserImage.setImageBitmap(BitmapFactory.decodeFile(photoPath));
+            FancyToast.makeText(UserInfoEditActivity.this,"取得照片",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
+            //上传
+            //上传时记得压缩
+        }
+
+        @Override
+        public void onHanlderFailure(int requestCode, String errorMsg) {
+            Log.e("editinfo",errorMsg);
+            FancyToast.makeText(UserInfoEditActivity.this,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
+        }
+    };
 }

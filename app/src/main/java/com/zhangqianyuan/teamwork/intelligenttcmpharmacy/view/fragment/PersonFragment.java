@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ToActivityUtil;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.AboutUsActivity;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.UserInfoEditActivity;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.CircleImageView;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.MaskableImageView;
@@ -112,14 +113,17 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
 
                 break;
             /* 关于我们 */
-            case R.id.about_us_bt:
-
+            case R.id.about_us_bt:{
+                ToActivityUtil.toNextActivity(context, AboutUsActivity.class);
                 break;
+            }
             /* 服药提醒 */
-            case R.id.caution_bt:
+            case R.id.caution_bt:{
                 //跳转到系统的闹钟
-
+                Intent alarm = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+                startActivity(alarm);
                 break;
+            }
             /* 就诊记录 */
             case R.id.treat_record_bt:
 
