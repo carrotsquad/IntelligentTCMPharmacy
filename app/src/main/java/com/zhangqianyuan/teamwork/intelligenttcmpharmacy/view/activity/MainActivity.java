@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView mBottomNav;
 
-    private String titles[] = new String[]{"主页", "药材百科", "个人中心"};
+    private String[] titles = new String[]{"主页", "药材百科", "个人中心"};
 
     /**
      * 几个常量
