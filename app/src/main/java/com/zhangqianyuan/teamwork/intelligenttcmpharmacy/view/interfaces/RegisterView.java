@@ -1,4 +1,4 @@
-package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.View;
+package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces;
 
 /**
  * Description 注册界面接口

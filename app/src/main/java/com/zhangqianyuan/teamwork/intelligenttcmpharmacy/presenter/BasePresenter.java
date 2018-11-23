@@ -1,5 +1,7 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter;
 
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.View.BaseView;
+
 /**
  * @author zhoudada
  * @version $Rev$
@@ -7,5 +9,15 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter;
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-public class BasePresenter {
+public class BasePresenter<V extends BaseView> {
+    V v;
+    public void attachActivty(V view){
+        this.v=view;
+    }
+    public void dettachActivity(){
+        this.v=null;
+    }
+    public boolean isAttachActivity(){
+        return this.v!=null;
+    }
 }

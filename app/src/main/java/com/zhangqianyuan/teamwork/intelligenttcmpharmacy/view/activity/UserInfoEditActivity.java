@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -52,16 +54,44 @@ public class UserInfoEditActivity extends AppCompatActivity {
     EditText mUserName;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+
+    @BindView(R.id.nick_ID)
+    EditText nick_id;
+
+    @BindView(R.id.nick_phonenumber)
+    EditText  phonenumber;
+
+    @BindView(R.id.nick_email)
+    EditText email;
+
+    @BindView(R.id.finish_bt)
+    Button  finish;
+
+
 //    @BindView(R.id.expansionLayout)
 
 
     private boolean hasChanged = false;
+    private SharedPreferences shar;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userinfo_edit);
         ButterKnife.bind(this);
+        shar = getSharedPreferences("users",MODE_PRIVATE);
+        editor  = shar.edit();
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor.putString("nickid",nick_id.getText().toString());
+                editor.putString("nickname",mUserName.getText().toString());
+                editor.putString("phonenumber",phonenumber.getText().toString());
+                editor.commit();
+                finish();
+            }
+        });
         initViews();
     }
 
@@ -78,7 +108,10 @@ public class UserInfoEditActivity extends AppCompatActivity {
         mToolbar.setTitleTextColor(Color.WHITE);
         //最开始设置姓名编辑光标不现实
         mUserName.setCursorVisible(false);
-
+        mUserName.setText(shar.getString("nickname",null));
+        nick_id.setText(shar.getString("phone",null));
+        phonenumber.setText(shar.getString("phone",null));
+        email.setText("点击设置");
     }
 
     @Override

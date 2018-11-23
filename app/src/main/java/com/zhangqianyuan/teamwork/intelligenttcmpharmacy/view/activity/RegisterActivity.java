@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.View.RegisterView;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.RegisterView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,11 +49,15 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     String identify;               //用户身份
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor mEditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+        sharedPreferences = getSharedPreferences("users",MODE_PRIVATE);
+        mEditor = sharedPreferences.edit();
         selectIdentify.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -70,6 +75,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                 //这里通过presenter进行 请求验证码操作
                 break;
             case R.id.confirm_bt:
+                mEditor.putString("phone",phoneNumber.getText().toString());
+                mEditor.putString("password",passwords.getText().toString());
+                mEditor.putString("nickname",nameInput.getText().toString());
+                mEditor.commit();
                 startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 finish();
 //                if (isEveryThingRight()){

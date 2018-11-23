@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.adapter.MainViewAdapter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.PersonFragment;
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);
         ButterKnife.bind(this);
-
         initView();
     }
 
@@ -119,9 +119,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });}
 
-
+         public void init(){
+            ZXingLibrary.initDisplayOpinion(this);
+        }
 
     }
-}
+

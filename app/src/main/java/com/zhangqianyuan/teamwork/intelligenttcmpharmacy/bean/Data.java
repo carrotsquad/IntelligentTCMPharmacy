@@ -1,9 +1,12 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean;
 
 
+import com.avos.avoscloud.AVSMSOption;
+
 public class Data<T> {
     private int code;
     private String message;
+
     private T body;
     public String getMessage() {
         return message;

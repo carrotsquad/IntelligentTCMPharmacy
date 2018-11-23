@@ -1,6 +1,9 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.MutableContextWrapper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,19 +12,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CaptureFragment;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.youth.banner.Banner;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.LocalImageLoader;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.DrugsActivity;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SelectFragment extends Fragment {
+
+    public static final  int REQUEST_CODE =1;
 
 
     @BindView(R.id.prescribe_bt)
@@ -72,5 +85,39 @@ public class SelectFragment extends Fragment {
 
         mBanner.setImages(images);
         mBanner.start();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE){
+            if (resultCode==1){
+                if (null!=data){
+                    Bundle bundle = data.getExtras();
+                    if (bundle==null){
+                        return;
+                    }
+                    if (bundle.getInt(CodeUtils.RESULT_TYPE)==CodeUtils.RESULT_SUCCESS){
+                        String result = bundle.getString(CodeUtils.RESULT_STRING);}
+                        else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED){
+                        Toast.makeText(context,"没有找到相关信息哦",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
+    }
+
+    @OnClick({R.id.prescribe_bt,R.id.treat_bt})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.prescribe_bt:
+                Intent intent = new Intent(context,CaptureActivity.class);
+                startActivityForResult(intent,REQUEST_CODE);
+                break;
+            case R.id.treat_bt:
+                Intent intent1 = new Intent(context,DrugsActivity.class);
+                startActivity(intent1);
+                break;
+
+        }
     }
 }

@@ -1,18 +1,16 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 
-public abstract class BaseActivity extends AppCompatActivity {
-
+public  class BaseActivity extends Application {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_base);
+    public void onCreate() {
+        super.onCreate();
+        ZXingLibrary.initDisplayOpinion(this);
     }
-
-    public abstract  void initMVP();
-    public abstract  void initView();
 }
