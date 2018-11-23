@@ -13,6 +13,7 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.adapter.MainViewAdapter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.PersonFragment;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.SearchFragment;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.SelectFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView(){
 
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(SearchFragment.newInstance());
+        fragments.add(SelectFragment.newInstance());
         fragments.add(SearchFragment.newInstance());
         fragments.add(new PersonFragment());
 

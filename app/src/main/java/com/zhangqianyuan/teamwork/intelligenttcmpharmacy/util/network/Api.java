@@ -21,6 +21,4 @@ public interface Api {
     @POST("drug/info")
     @FormUrlEncoded
     Observable<Data<DrugInfo>> getDrugInfo(@Field("chineseName") String drugName);
-
-
 }

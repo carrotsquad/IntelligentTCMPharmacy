@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import butterknife.OnClick;
  * Description
  * 登录页面
  */
+// TODO: 2018/11/24 需要完善
 public class LoginActivity extends AppCompatActivity implements LoginView {
     @BindView(R.id.account_input)
     EditText userName;  //账号输入框
@@ -44,8 +46,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         switch (view.getId()){
             case R.id.login_bt:
                 //在服务器进行信息比对决定是否登陆
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
                 break;
             case  R.id.register_bt:
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
                 //进入注册界面
                 break;
         }

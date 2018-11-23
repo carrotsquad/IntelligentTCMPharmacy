@@ -52,7 +52,7 @@ public class UserInfoEditActivity extends AppCompatActivity {
     EditText mUserName;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.expansionLayout)
+//    @BindView(R.id.expansionLayout)
 
 
     private boolean hasChanged = false;
