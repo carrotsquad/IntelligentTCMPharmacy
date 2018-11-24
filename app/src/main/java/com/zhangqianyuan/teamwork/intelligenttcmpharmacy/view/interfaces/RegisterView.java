@@ -1,18 +1,18 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces;
 
-/**
- * Description 注册界面接口
- * @author zhoudada
- * @version $Rev$
- * @des ${TODO}
- * @updateAuthor $Author$
- * @updateDes ${TODO}
- */
-public interface RegisterView {
+public interface RegisterView extends BaseView{
+
     /**
-     *Description presenter传回的验证码是否与用户输入相同
-     * @param  identifyCode
-     * @return
+     * 验证手机号
+     * @param isright
+     * @param info
      */
-    boolean isIdentifyCodeRight(String identifyCode);
+    void verify(Boolean isright,String info);
+
+    /**
+     * 注册
+     * @param isright
+     * @param info
+     */
+    void register(Boolean isright,String info);
 }

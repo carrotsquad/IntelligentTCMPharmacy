@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.IBaseView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,7 +25,7 @@ import butterknife.ButterKnife;
  * Email: zhang.qianyuan@foxmail.com
  */
 // TODO: 2018/10/21 搜索功能，和服务器结合
-public class SearchFragment extends Fragment implements IBaseView {
+public class SearchFragment extends Fragment{
 
 
     //药物简介
@@ -122,8 +120,4 @@ public class SearchFragment extends Fragment implements IBaseView {
     }
 
 
-    @Override
-    public void showInfo(Object object, Boolean issucced) {
-
-    }
 }

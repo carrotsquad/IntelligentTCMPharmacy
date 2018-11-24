@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.RegisterPresenter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.RegisterView;
 
 import butterknife.BindView;
@@ -20,8 +21,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Description
- * 注册界面
+ * Description: 注册界面
+ * Created at: 2018/12/22 21:20
+ * @author: zhangqianyuan
+ * Email: zhang.qianyuan@foxmail.com
  */
 // TODO: 2018/11/24 需完善
 public class RegisterActivity extends AppCompatActivity implements RegisterView {
@@ -49,6 +52,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     String identify;               //用户身份
 
+    private Boolean isVerifyRight = false;
+    private RegisterPresenter presenter;
+
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor mEditor;
     @Override
@@ -58,6 +64,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         ButterKnife.bind(this);
         sharedPreferences = getSharedPreferences("users",MODE_PRIVATE);
         mEditor = sharedPreferences.edit();
+        presenter = new RegisterPresenter();
+        presenter.attachActivty(this);
         selectIdentify.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -71,34 +79,34 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
    @OnClick({R.id.identifying_number_send,R.id.confirm_bt})
    public void onClick(View v){
         switch (v.getId()){
-            case R.id.identifying_number_send:
+            case R.id.identifying_number_send: {
                 //这里通过presenter进行 请求验证码操作
+                if(!phoneNumber.getText().toString().equals("")){
+                    presenter.verifyPhonenumber(phoneNumber.getText().toString());
+                }
+            }
+            break;
+            case R.id.confirm_bt: {
+//                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+//                finish();
+                if (isEveryThingRight()){
+                    /*这里通过presenter进行 验证码 验证操作
+                     全都ok后 回到登陆界面登陆
+                     */
+                    presenter.register(phoneNumber.getText().toString(),
+                            passwords.getText().toString(),
+                            identifyNumber.getText().toString(),
+                            nameInput.getText().toString());
+                }
                 break;
-            case R.id.confirm_bt:
-                mEditor.putString("phone",phoneNumber.getText().toString());
-                mEditor.putString("password",passwords.getText().toString());
-                mEditor.putString("nickname",nameInput.getText().toString());
-                mEditor.commit();
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                finish();
-//                if (isEveryThingRight()){
-//                    /*这里通过presenter进行 验证码 验证操作
-//                     全都ok后 回到登陆界面登陆
-//                     */
-//                }
+            }
+            default:
                 break;
 
         }
    }
 
-    @Override
-    public boolean isIdentifyCodeRight(String identifyCode){
-        if (identifyCode.equals(identifyNumber.getText().toString())){
-            return  true;
-        }else {
-            return false;
-        }
-    }
+
 
     public boolean isEveryThingRight(){
         if (phoneNumber.getText().toString().equals("")){
@@ -110,11 +118,33 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         }else if (nameInput.getText().toString().equals("")){
             Toast.makeText(RegisterActivity.this,"请输入昵称",Toast.LENGTH_SHORT).show();
             return false;
-        }else if (identify.equals("")){
-            Toast.makeText(RegisterActivity.this,"请选择身份",Toast.LENGTH_SHORT).show();
+        }else if (identifyNumber.getText().toString().equals("")){
+            Toast.makeText(RegisterActivity.this,"请输入验证码",Toast.LENGTH_SHORT).show();
             return false;
         }else {
             return true;
+        }
+    }
+
+    @Override
+    public void verify(Boolean isright, String info) {
+        if(isright) {
+            Toast.makeText(this, "验证码发送成功", Toast.LENGTH_SHORT);
+        }else {
+            Toast.makeText(this, info, Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    public void register(Boolean isright, String info) {
+        if(isright){
+            Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT);
+            mEditor.putString("phone", phoneNumber.getText().toString());
+            mEditor.putString("password", passwords.getText().toString());
+            mEditor.putString("nickname", nameInput.getText().toString());
+            mEditor.commit();
+        }else {
+            Toast.makeText(this, info, Toast.LENGTH_SHORT);
         }
     }
 }

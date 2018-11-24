@@ -12,7 +12,7 @@
 //        @Override
 //        public void getInfo(Object object, Context context, IBaseListener iBaseListener) {
 //            super.getInfo(object, context, iBaseListener);
-//            api.getDrugInfo((String) object)
+//            Api.getDrugInfo((String) object)
 //                    .subscribeOn(Schedulers.io())
 //                    .unsubscribeOn(Schedulers.io())
 //                    .observeOn(Schedulers.io())

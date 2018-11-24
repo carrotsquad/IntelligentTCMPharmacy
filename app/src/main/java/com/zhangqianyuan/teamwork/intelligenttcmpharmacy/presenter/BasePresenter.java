@@ -1,6 +1,6 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter;
 
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.View.BaseView;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.BaseView;
 
 /**
  * @author zhoudada

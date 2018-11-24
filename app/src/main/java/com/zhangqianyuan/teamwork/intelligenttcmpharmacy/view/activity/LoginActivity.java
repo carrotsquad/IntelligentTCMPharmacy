@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.View.LoginView;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.LoginView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
