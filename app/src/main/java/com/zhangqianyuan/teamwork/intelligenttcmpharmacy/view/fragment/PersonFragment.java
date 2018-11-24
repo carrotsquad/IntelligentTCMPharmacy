@@ -61,7 +61,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_personage, container, false);
         initView();
-        Log.d("fuck",getActivity().getSharedPreferences("users",Context.MODE_PRIVATE).getString("nickname",null));
+//        Log.d("fuck",getActivity().getSharedPreferences("users",Context.MODE_PRIVATE).getString("nickname",null));
         shar = getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
         userName.setText(shar.getString("nickname",null));
         context = getContext();

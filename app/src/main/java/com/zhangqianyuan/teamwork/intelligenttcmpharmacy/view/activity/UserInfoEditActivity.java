@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.picasso.Picasso;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
@@ -68,7 +70,11 @@ public class UserInfoEditActivity extends AppCompatActivity {
     Button  finish;
 
 
-//    @BindView(R.id.expansionLayout)
+    @BindView(R.id.expansionLayout)
+    ExpansionLayout expansionLayout;
+
+    @BindView(R.id.log_off)
+    Button logOff;
 
 
     private boolean hasChanged = false;
@@ -168,6 +174,9 @@ public class UserInfoEditActivity extends AppCompatActivity {
 //                SharedPreferences.Editor editor = preferences.edit();
 //                editor.clear();
 //                editor.commit();
+                startActivity(new Intent(UserInfoEditActivity.this,LoginActivity.class));
+                finish();
+                //同时进行一些数据清除，如数据库的清理
                 //同时进行一些数据清除，如数据库的清理
                 break;
                 default:{

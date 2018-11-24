@@ -1,15 +1,20 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.uuzuche.lib_zxing.activity.ZXingLibrary;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.adapter.MainViewAdapter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.PersonFragment;
@@ -58,8 +63,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_view);
         ButterKnife.bind(this);
         initView();
+        initPermission();
     }
 
+
+    //申请权限
+    private void initPermission() {
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.INTERNET, Manifest.permission.CAMERA},1);
+        }
+    }
+
+    //权限申请
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case 1:
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                } else {
+                    FancyToast.makeText(MainActivity.this,"你拒绝了权限", FancyToast.ERROR,Toast.LENGTH_SHORT,false).show();
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     /**
      * Description: 初始化界面
@@ -121,9 +150,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });}
 
-         public void init(){
-            ZXingLibrary.initDisplayOpinion(this);
-        }
+//         public void init(){
+//            ZXingLibrary.initDisplayOpinion(this);
+//        }
 
     }
 
