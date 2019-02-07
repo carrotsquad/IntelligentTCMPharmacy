@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.UpdateNickName">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/nick_name_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            >
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/old_nickname_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_line"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/old"
+            android:textColor="@color/primary_text"
+            android:layout_margin="8dp"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/font_large"
+            android:text="旧昵称:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/old_nickname"
+            android:layout_toEndOf="@+id/old"
+            android:textColor="@color/primary_text"
+            android:layout_margin="8dp"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/font_large"
+            android:text="默认"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/new_nickname_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_line"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/new_nickname"
+            android:textColor="@color/primary_text"
+            android:layout_margin="8dp"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/font_large"
+            android:text="新昵称:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_toEndOf="@+id/new_nickname"
+            android:textColor="@color/primary_text"
+            android:layout_margin="8dp"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/font_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/finish_bt_nick"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginRight="4dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_bg"
+            android:text="完成"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_large" />
+        <Button
+            android:id="@+id/cancel_nick"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_bg"
+            android:text="取消"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_large" />
+    </LinearLayout>
+</LinearLayout>

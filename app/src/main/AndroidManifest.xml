@@ -34,10 +34,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.MainActivity">
-
-        </activity>
-        <activity android:name=".view.activity.UserInfoEditActivity"></activity>
+        <activity android:name=".view.activity.MainActivity" />
+        <activity android:name=".view.activity.UserInfoEditActivity" />
         <activity android:name=".view.activity.AboutUsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.AboutUsActivity" />
@@ -60,7 +58,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.DrugsActivity" />
-
+        <activity
+            android:name=".view.activity.UpdateNickName"
+            android:label="修改昵称" />
+        <activity android:name=".view.activity.UpdatePassWords"></activity>
     </application>
 
 </manifest>
