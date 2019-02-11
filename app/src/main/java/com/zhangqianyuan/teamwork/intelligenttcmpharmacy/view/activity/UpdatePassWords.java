@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.UpdatePassWordContract;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.UpdatePassWordPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +21,7 @@ import butterknife.OnClick;
 /**
  * 修改密码界面
  */
-public class UpdatePassWords extends AppCompatActivity {
+public class UpdatePassWords extends AppCompatActivity implements UpdatePassWordContract.updatePassWordView {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -39,6 +41,7 @@ public class UpdatePassWords extends AppCompatActivity {
     private  SharedPreferences shar;
     private  SharedPreferences.Editor mEditor;
     private  String oldPsWord;
+    private UpdatePassWordPresenter mUpdatePassWordPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,8 @@ public class UpdatePassWords extends AppCompatActivity {
         shar = getSharedPreferences("users",MODE_PRIVATE);
         mEditor = shar.edit();
         oldPsWord = shar.getString("password",null);
+        mUpdatePassWordPresenter = new UpdatePassWordPresenter();
+        mUpdatePassWordPresenter.attachActivty(this);
     }
 
     //检查密码格式/正确度
@@ -94,8 +99,26 @@ public class UpdatePassWords extends AppCompatActivity {
     public void onClick(View view){
         if (isEverythingRight()){
             //上传新密码到后端，同时将新密码存到shar
+            String password = newPsInput.getText().toString();
+            String tell = shar.getString("phonenumber",null);
+            mUpdatePassWordPresenter.updatePassWord(tell,password);
             mEditor.putString("password",newPsInput.getText().toString());
             mEditor.commit();
         }
+    }
+
+    @Override
+    public void isRight(boolean result, String reason) {
+        if (result){
+            Toast.makeText(this,"操作成功",Toast.LENGTH_SHORT).show();
+            finish();
+        }else {
+            Toast.makeText(this,"操作失败\n"+reason,Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+       mUpdatePassWordPresenter.dettachActivity();
     }
 }

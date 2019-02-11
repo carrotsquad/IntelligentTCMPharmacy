@@ -12,15 +12,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.UpdateNickNameorPassWordBean;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.UpdateNickNameContract;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network.Api;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.UpdateNickNamePresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Callback;
 
 /**
  * 修改昵称界面
  */
-public class UpdateNickName extends AppCompatActivity {
+public class UpdateNickName extends AppCompatActivity implements UpdateNickNameContract.updateNickNameView {
 
     @BindView(R.id.nick_name_bar)
     Toolbar    mToolbar;
@@ -39,12 +44,15 @@ public class UpdateNickName extends AppCompatActivity {
 
     private SharedPreferences shar ;
     private SharedPreferences.Editor  edit;
+    private UpdateNickNamePresenter mUpdateNickNamePresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_nick_name);
         ButterKnife.bind(this);
         initView();
+        mUpdateNickNamePresenter = new UpdateNickNamePresenter();
+        mUpdateNickNamePresenter.attachActivty(this);
     }
 
     //初始化界面
@@ -66,9 +74,9 @@ public class UpdateNickName extends AppCompatActivity {
                 if (TextUtils.isEmpty(newNickName.getText())){
                     Toast.makeText(this,"昵称不能为空",Toast.LENGTH_SHORT).show();
                 }else{
+                    mUpdateNickNamePresenter.updateNickName(shar.getString("phonenumber",null),newNickName.getText().toString());
                     edit.putString("nickname",newNickName.getText().toString());
                     edit.commit();
-                    finish();
                 }
                 break;
             case R.id.cancel_nick:
@@ -76,4 +84,19 @@ public class UpdateNickName extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void isRight(boolean result, String reason) {
+        if (result){
+            Toast.makeText(this,"操作成功",Toast.LENGTH_SHORT).show();
+            finish();
+        }else {
+            Toast.makeText(this,"操作失败\n"+reason,Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mUpdateNickNamePresenter.dettachActivity();
+    }
 }

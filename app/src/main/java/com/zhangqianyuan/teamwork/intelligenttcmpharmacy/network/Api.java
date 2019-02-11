@@ -1,8 +1,11 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.RegisterOrLogInFeedbackBean;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.UpdateNickNameorPassWordBean;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -30,5 +33,11 @@ public interface Api {
     @POST("/autoMedicine/login")
     Observable<RegisterOrLogInFeedbackBean> getLogIn(@Field("tele") String phonenumber,@Field("password") String pwd);
 
+    @FormUrlEncoded
+    @POST("/autoMedicine/changeName")
+    Call<UpdateNickNameorPassWordBean> UpdateNickName(@Field("tele") String phonenumber,@Field("newName") String newName );
 
+    @FormUrlEncoded
+    @POST("/autoMedicine/changePassword")
+    Call<UpdateNickNameorPassWordBean> UpdatePassWord(@Field("tele") String phonenumber,@Field("newPassword") String newPassWord);
 }
