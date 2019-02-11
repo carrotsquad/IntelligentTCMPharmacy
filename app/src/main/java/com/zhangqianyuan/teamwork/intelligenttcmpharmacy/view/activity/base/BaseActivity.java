@@ -1,4 +1,4 @@
-package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
+package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.base;
 
 import android.app.Application;
 import android.os.Bundle;

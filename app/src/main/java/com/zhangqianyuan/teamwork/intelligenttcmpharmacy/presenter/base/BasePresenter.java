@@ -1,13 +1,13 @@
-package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter;
+package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.base;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.BaseView;
 
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class BasePresenter<V extends BaseView> {
     protected V v;

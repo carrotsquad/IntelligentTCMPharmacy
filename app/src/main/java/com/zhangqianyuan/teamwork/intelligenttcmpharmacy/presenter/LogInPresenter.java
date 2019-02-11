@@ -4,6 +4,7 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.RegisterOrLogInFee
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.LogInContract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.model.BaseModel;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network.Api;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.base.BasePresenter;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
