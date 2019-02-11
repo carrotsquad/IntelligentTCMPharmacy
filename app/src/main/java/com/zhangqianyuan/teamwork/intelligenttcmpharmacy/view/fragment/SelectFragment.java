@@ -123,4 +123,9 @@ public class SelectFragment extends Fragment {
 
         }
     }
+
+    //缓存中药百科数据
+    public void  cacheDrugInfo(){
+
+    }
 }
