@@ -11,18 +11,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.LoginView;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.LogInContract;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.LogInPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Description
- * 登录页面
+ * @Description: 登录页面
+ * Created at: 2019/2/11 14:13
+ * @author: zhangqianyuan
+ * @Email: zhang.qianyuan@foxmail.com
+ * @version:
+ * @updateAuthor:
+ * @updateDes:
  */
-// TODO: 2018/11/24 需要完善
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends AppCompatActivity implements LogInContract.LogInView {
     @BindView(R.id.account_input)
     EditText userName;  //账号输入框
 
@@ -30,48 +35,78 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     EditText passwords; //密码输入框
 
     @BindView(R.id.login_bt)
-    Button   login;     //登录按钮
+    Button login;     //登录按钮
 
     @BindView(R.id.register_bt)
-    Button   register;    //注册按钮
+    Button register;    //注册按钮
+
+    private LogInPresenter logInPresenter;
+    private String pwd = "";
+    private String tele = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        logInPresenter = new LogInPresenter();
+        logInPresenter.attachActivty(this);
     }
 
-   @OnClick({R.id.login_bt,R.id.register_bt})
-   public void onClick(View view){
-        switch (view.getId()){
-            case R.id.login_bt:
+    @Override
+    protected void onDestroy() {
+        logInPresenter.dettachActivity();
+        super.onDestroy();
+    }
+
+    @OnClick({R.id.login_bt, R.id.register_bt})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.login_bt: {
                 //在服务器进行信息比对决定是否登陆
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
+                if (isFormCompleted()) {
+                    logInPresenter.getLogIn(tele,pwd);
+                } else {
+                    Toast.makeText(this, "请填写完整", Toast.LENGTH_SHORT).show();
+                }
                 break;
-            case  R.id.register_bt:
+            }
+            case R.id.register_bt: {
+                //进入注册界面
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 finish();
-                //进入注册界面
                 break;
+            }
+            default: {
+                break;
+            }
         }
-   }
+    }
 
-    @Override
-    public void login(){
-        Toast.makeText(LoginActivity.this,"登陆成功", Toast.LENGTH_SHORT).show();
+    //检查表单是否填写完整
+    private boolean isFormCompleted() {
+        pwd=passwords.getText().toString();
+        tele=userName.getText().toString();
+        return ((!"".equals(pwd))||(!"".equals(tele)));
     }
 
     @Override
-    public void showAlertDialog(){
-        AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
-        dialog.setTitle("");
-        dialog.setMessage("账号不存在，请先注册账号");
-        dialog.setCancelable(true);
-        dialog.setPositiveButton("好的", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {}
-        });
-        dialog.show();
+    public void onResult(Boolean isright, String info) {
+        if (isright) {
+            Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        } else {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
+            dialog.setTitle("");
+            dialog.setMessage("账号不存在，请先注册账号");
+            dialog.setCancelable(true);
+            dialog.setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                }
+            });
+            dialog.show();
+        }
     }
 }

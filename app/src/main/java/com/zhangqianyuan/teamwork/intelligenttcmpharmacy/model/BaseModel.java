@@ -16,14 +16,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public abstract class BaseModel {
+public class BaseModel {
 
     private Retrofit retrofit;
     Api api;
     private OkHttpClient okHttpClient;
     private String baseUrl = "https://www.jintianlixia.cn";
 
-    BaseModel() {
+    public BaseModel() {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override public void log(String message) {
@@ -43,5 +43,29 @@ public abstract class BaseModel {
                 .baseUrl(baseUrl)
                 .build();
         api = retrofit.create(Api.class);
+    }
+
+    public Api getApi() {
+        return api;
+    }
+
+    public void setApi(Api api) {
+        this.api = api;
+    }
+
+    public OkHttpClient getOkHttpClient() {
+        return okHttpClient;
+    }
+
+    public Retrofit getRetrofit() {
+        return retrofit;
+    }
+
+    public void setOkHttpClient(OkHttpClient okHttpClient) {
+        this.okHttpClient = okHttpClient;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 }

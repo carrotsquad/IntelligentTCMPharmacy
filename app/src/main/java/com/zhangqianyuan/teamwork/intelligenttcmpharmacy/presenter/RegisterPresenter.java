@@ -1,30 +1,52 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.RegisterOrLogInFeedbackBean;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.model.IRegisterModel;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.model.RegisterModel;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.RegisterView;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.RegisterContract;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.model.BaseModel;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network.Api;
 
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Description: 注册的presenter
  * Created at: 2018/12/22 20:09
+ *
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-public class RegisterPresenter extends BasePresenter<RegisterView>{
+public class RegisterPresenter extends BasePresenter<RegisterContract.RegisterView> implements RegisterContract.RegisterPresenter{
+    private RegisterContract.RegisterModel registerModel;
 
-    private RegisterView registerView;
-    private IRegisterModel registerModel;
+    public RegisterPresenter() {
+        registerModel = new RegisterContract.RegisterModel() {
+            Api api = new BaseModel().getApi();
 
-    public RegisterPresenter(){
-        registerModel = new RegisterModel();
+            @Override
+            public void getVerify(String phonenumber, Observer<RegisterOrLogInFeedbackBean> observer) {
+                api.getVerification(phonenumber)
+                        .subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(observer);
+            }
+
+            @Override
+            public void getSign(String phonenumber, String code, String password, String name, Observer<RegisterOrLogInFeedbackBean> observer) {
+                api.getSign(phonenumber, password, code, name)
+                        .subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(observer);
+            }
+        };
     }
 
+    @Override
     public void verifyPhonenumber(String phonenumber) {
-        if(isAttachActivity()){
+        if (isAttachActivity()) {
             registerModel.getVerify(phonenumber, new Observer<RegisterOrLogInFeedbackBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
@@ -33,12 +55,12 @@ public class RegisterPresenter extends BasePresenter<RegisterView>{
 
                 @Override
                 public void onNext(RegisterOrLogInFeedbackBean registerOrLogInFeedbackBean) {
-                    if(registerOrLogInFeedbackBean==null){
-                        registerView.verify(false,"网络错误");
-                    }else if(!registerOrLogInFeedbackBean.getResult()){
-                        registerView.verify(false,registerOrLogInFeedbackBean.getReason());
-                    }else {
-                        registerView.verify(true,null);
+                    if (registerOrLogInFeedbackBean == null) {
+                        v.verify(false, "网络错误");
+                    } else if (!registerOrLogInFeedbackBean.getResult()) {
+                        v.verify(false, registerOrLogInFeedbackBean.getReason());
+                    } else {
+                        v.verify(true, "");
                     }
                 }
 
@@ -55,8 +77,9 @@ public class RegisterPresenter extends BasePresenter<RegisterView>{
         }
     }
 
+    @Override
     public void register(String phonenumber, String password, String code, String name) {
-        if(isAttachActivity()){
+        if (isAttachActivity()) {
             registerModel.getSign(phonenumber, code, password, name, new Observer<RegisterOrLogInFeedbackBean>() {
                 @Override
                 public void onSubscribe(Disposable d) {
@@ -65,12 +88,12 @@ public class RegisterPresenter extends BasePresenter<RegisterView>{
 
                 @Override
                 public void onNext(RegisterOrLogInFeedbackBean registerOrLogInFeedbackBean) {
-                    if(registerOrLogInFeedbackBean==null){
-                        registerView.register(false,"网络错误");
-                    }else if(!registerOrLogInFeedbackBean.getResult()){
-                        registerView.register(false,registerOrLogInFeedbackBean.getReason());
-                    }else {
-                        registerView.register(true,null);
+                    if (registerOrLogInFeedbackBean == null) {
+                        v.register(false, "网络错误");
+                    } else if (!registerOrLogInFeedbackBean.getResult()) {
+                        v.register(false, registerOrLogInFeedbackBean.getReason());
+                    } else {
+                        v.register(true, "");
                     }
                 }
 

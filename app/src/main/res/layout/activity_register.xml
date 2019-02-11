@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1"
+        app:layout_constraintGuide_percent="0.05"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="59dp" />
 
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <EditText
-        android:id="@+id/acount_input"
+        android:id="@+id/register_acount_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -43,7 +43,8 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
-        android:id="@+id/password_input"
+        android:inputType="textPassword"
+        android:id="@+id/register_password_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -55,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideline4"
         app:layout_constraintRight_toLeftOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/acount_input" />
+        app:layout_constraintTop_toBottomOf="@+id/register_acount_input" />
 
     <LinearLayout
         android:id="@+id/linearlayout4"
@@ -77,49 +78,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="姓名:"
+                android:text="昵称:"
                 android:textSize="@dimen/font_large" />
             <EditText
                 android:id="@+id/name_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <!--身份-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/identify"
-                android:textSize="@dimen/font_large" />
-
-            <RadioGroup
-                android:id="@+id/select_identify"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-
-                    android:id="@+id/doctor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:text="医师" />
-
-                <RadioButton
-                    android:id="@+id/patient"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="病人" />
-            </RadioGroup>
         </LinearLayout>
     </LinearLayout>
 
@@ -134,7 +98,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideline4"
         app:layout_constraintRight_toLeftOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/password_input">
+        app:layout_constraintTop_toBottomOf="@+id/register_password_input">
 
         <EditText
             android:id="@+id/identifying_number_input"
@@ -157,9 +121,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:weightSum="1"
         app:layout_constraintHorizontal_bias="0.0"
@@ -173,8 +138,29 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:background="@drawable/login_bg"
-            android:text="@string/confirm"
+            android:text="@string/register"
             android:textColor="@color/white"
+            android:textSize="@dimen/font_large" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:weightSum="1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <Button
+            android:id="@+id/register_login_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:background="@drawable/register_bg"
+            android:text="@string/login"
             android:textSize="@dimen/font_large" />
     </LinearLayout>
 

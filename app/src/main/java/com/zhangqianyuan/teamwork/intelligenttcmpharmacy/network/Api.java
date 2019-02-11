@@ -27,8 +27,8 @@ public interface Api {
                                                     @Field("name") String name);
 
     @FormUrlEncoded
-    @POST("/autoMedicine/sign")
-    Observable<RegisterOrLogInFeedbackBean> getLogIn(@Field("tele") String phonenumber);
+    @POST("/autoMedicine/login")
+    Observable<RegisterOrLogInFeedbackBean> getLogIn(@Field("tele") String phonenumber,@Field("password") String pwd);
 
 
 }

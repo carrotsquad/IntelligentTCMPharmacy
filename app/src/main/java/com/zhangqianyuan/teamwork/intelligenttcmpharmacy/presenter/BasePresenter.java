@@ -10,7 +10,7 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.BaseVie
  * @updateDes ${TODO}
  */
 public class BasePresenter<V extends BaseView> {
-    V v;
+    protected V v;
     public void attachActivty(V view){
         this.v=view;
     }

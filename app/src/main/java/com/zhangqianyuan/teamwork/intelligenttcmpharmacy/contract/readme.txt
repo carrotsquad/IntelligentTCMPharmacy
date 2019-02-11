@@ -1,0 +1,1 @@
+contract里面写view和对应presenter的interface
