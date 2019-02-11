@@ -47,7 +47,8 @@ public class MaskableImageView extends android.support.v7.widget.AppCompatImageV
 //        if (drawable == null){
 //            return;
 //        }
-        if( pressed ){//点击  
+        if( pressed ){
+            //点击
             /** 
              * 通过设置滤镜来改变图片亮度@minghao 
              */  

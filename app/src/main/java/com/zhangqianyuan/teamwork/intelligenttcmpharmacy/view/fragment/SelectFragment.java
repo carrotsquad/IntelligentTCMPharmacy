@@ -34,7 +34,7 @@ import butterknife.OnClick;
 
 public class SelectFragment extends Fragment {
 
-    public static final  int REQUEST_CODE =1;
+    public static final int REQUEST_CODE = 1;
 
 
     @BindView(R.id.prescribe_bt)
@@ -47,7 +47,7 @@ public class SelectFragment extends Fragment {
     private View view;
     private Context context;
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         SelectFragment fragment = new SelectFragment();
         return fragment;
     }
@@ -56,7 +56,7 @@ public class SelectFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_select, null);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         context = getContext();
         initView();
         return view;
@@ -72,7 +72,7 @@ public class SelectFragment extends Fragment {
         super.onDestroyView();
     }
 
-    private void initView(){
+    private void initView() {
 
         //广告轮播图
         mBanner.setImageLoader(new LocalImageLoader());
@@ -89,34 +89,37 @@ public class SelectFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE){
-            if (resultCode==1){
-                if (null!=data){
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == 1) {
+                if (null != data) {
                     Bundle bundle = data.getExtras();
-                    if (bundle==null){
+                    if (bundle == null) {
                         return;
                     }
-                    if (bundle.getInt(CodeUtils.RESULT_TYPE)==CodeUtils.RESULT_SUCCESS){
-                        String result = bundle.getString(CodeUtils.RESULT_STRING);}
-                        else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED){
-                        Toast.makeText(context,"没有找到相关信息哦",Toast.LENGTH_SHORT).show();
+                    if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                        String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                        Toast.makeText(context, "没有找到相关信息哦", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         }
     }
 
-    @OnClick({R.id.prescribe_bt,R.id.treat_bt})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.prescribe_bt, R.id.treat_bt})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.prescribe_bt:
-                Intent intent = new Intent(context,CaptureActivity.class);
-                startActivityForResult(intent,REQUEST_CODE);
+                Intent intent = new Intent(context, CaptureActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
                 break;
             case R.id.treat_bt:
-                Intent intent1 = new Intent(context,DrugsActivity.class);
+                Intent intent1 = new Intent(context, DrugsActivity.class);
                 startActivity(intent1);
                 break;
+            default: {
+                break;
+            }
 
         }
     }

@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         switch (v.getId()) {
             case R.id.identifying_number_send: {
                 //这里通过presenter进行 请求验证码操作
-                if (!phoneNumber.getText().toString().equals("")) {
+                if (!"".equals(phoneNumber.getText().toString())) {
                     presenter.verifyPhonenumber(phoneNumber.getText().toString());
 
                 }
@@ -112,16 +112,16 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
 
     public boolean isEveryThingRight() {
-        if (phoneNumber.getText().toString().equals("")) {
+        if ("".equals(phoneNumber.getText().toString())) {
             Toast.makeText(RegisterActivity.this, "请输入电话号码", Toast.LENGTH_SHORT).show();
             return false;
-        } else if (passwords.getText().toString().equals("")) {
+        } else if ("".equals(passwords.getText().toString())) {
             Toast.makeText(RegisterActivity.this, "密码不能为空", Toast.LENGTH_SHORT).show();
             return false;
-        } else if (nameInput.getText().toString().equals("")) {
+        } else if ("".equals(nameInput.getText().toString())) {
             Toast.makeText(RegisterActivity.this, "请输入昵称", Toast.LENGTH_SHORT).show();
             return false;
-        } else if (identifyNumber.getText().toString().equals("")) {
+        } else if ("".equals(identifyNumber.getText().toString())) {
             Toast.makeText(RegisterActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
             return false;
         } else {
