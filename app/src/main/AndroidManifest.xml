@@ -57,11 +57,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.DrugsActivity" />
         <activity
             android:name=".view.activity.UpdateNickName"
             android:label="修改昵称" />
-        <activity android:name=".view.activity.UpdatePassWords"></activity>
+        <activity android:name=".view.activity.UpdatePassWords" />
+        <activity android:name=".view.activity.ManualTakingMedicationActivity"></activity>
     </application>
 
 </manifest>

@@ -12,24 +12,39 @@ import java.util.List;
  * @updateDes ${TODO}
  */
 public class Prescription {
-    //用户自己输入的症状/我们提供的症状
-    private String symptom ;
+    /**
+     * prescription  药+质量 集合
+     * price     价格
+     * time      抓这个药方的时间时间格式为“yyyy-MM-dd HH:mm:ss”
+     */
+
     //药+质量 序列
-    private List<DrugAndMass> drugList;
+    private List<DrugAndWeight> prescription ;
+    private String price;
+    private String time;
 
-    public String getSymptom() {
-        return symptom;
+    public List<DrugAndWeight> getPrescription() {
+        return prescription;
     }
 
-    public void setSymptom(String symptom) {
-        this.symptom = symptom;
+    public void setPrescription(List<DrugAndWeight> prescription) {
+        this.prescription = prescription;
     }
 
-    public List<DrugAndMass> getDrugList() {
-        return drugList;
+    public String getPrice() {
+        return price;
     }
 
-    public void setDrugList(List<DrugAndMass> drugList) {
-        this.drugList = drugList;
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
+

@@ -26,7 +26,7 @@ public class UpdatePassWordPresenter extends BasePresenter<UpdatePassWordContrac
     public UpdatePassWordPresenter(){
         model = (String tell,String newPassword,Callback<UpdateNickNameorPassWordBean > callback) ->{
             Api api = new BaseModel().getApi();
-            api.UpdateNickName(tell, newPassword).enqueue(callback);
+            api.UpdatePassWord(tell, newPassword).enqueue(callback);
         };
     }
 

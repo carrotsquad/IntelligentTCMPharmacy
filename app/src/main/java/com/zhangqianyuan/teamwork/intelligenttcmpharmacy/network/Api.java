@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network;
 
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.GetUserPictureBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.RegisterOrLogInFeedbackBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.UpdateNickNameorPassWordBean;
 
@@ -40,4 +41,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("/autoMedicine/changePassword")
     Call<UpdateNickNameorPassWordBean> UpdatePassWord(@Field("tele") String phonenumber,@Field("newPassword") String newPassWord);
+
+    @FormUrlEncoded
+    @POST("/autoMedicine/getUserPic")
+    Call<GetUserPictureBean> getUserPic(@Field("tele") String tell);
 }

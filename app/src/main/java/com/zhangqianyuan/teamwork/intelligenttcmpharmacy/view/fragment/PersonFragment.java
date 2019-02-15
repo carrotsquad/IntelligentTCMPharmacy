@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.GetUserPictureContract;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.GetUserPicPresenter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ToActivityUtil;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.AboutUsActivity;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.UserInfoEditActivity;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.CircleImageView;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.MaskableImageView;
 
+import java.io.File;
+import java.net.URL;
 
 
 /**
@@ -32,7 +38,8 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.MaskableImageVie
  * Email: zhang.qianyuan@foxmail.com
  */
 // TODO: 2018/10/21 很多很多要做
-public class PersonFragment extends Fragment implements View.OnClickListener {
+// TODO: 2019/2/15   so much to do
+public class PersonFragment extends Fragment implements View.OnClickListener,GetUserPictureContract.GetUserPicView {
 
 
     /* 问诊记录 */
@@ -48,8 +55,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     /* 用户名 */
     private TextView userName;
 
+    public static final String T = "PersonFragment";
     private Context context;
     private View view;
+    private GetUserPicPresenter  mPresenter;
     private SharedPreferences shar;
     public static Fragment newInstance(){
         PersonFragment personFragment = new PersonFragment();
@@ -61,10 +70,12 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_personage, container, false);
         initView();
-//        Log.d("fuck",getActivity().getSharedPreferences("users",Context.MODE_PRIVATE).getString("nickname",null));
         shar = getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
         userName.setText(shar.getString("nickname",null));
         context = getContext();
+        mPresenter = new GetUserPicPresenter();
+        mPresenter.attachActivty(this);
+        mPresenter.getUserPic(shar.getString("phone",null));
         return view;
     }
 
@@ -98,19 +109,20 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.user_image:{
                 //进行弹窗显示
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle(R.string.remind)
-                        .setMessage(R.string.need_to_go_to_user_setting)
-                        .setCancelable(true)
-                        .setPositiveButton("确定",
-                                (dialog, what) -> {
-                                    ToActivityUtil.toNextActivity(context, UserInfoEditActivity.class);
-                                    dialog.dismiss();
-                                })
-                        .setNegativeButton("取消",
-                                (dialog, what) -> dialog.dismiss()
-                        )
-                        .show();
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                builder.setTitle(R.string.remind)
+//                        .setMessage(R.string.need_to_go_to_user_setting)
+//                        .setCancelable(true)
+//                        .setPositiveButton("确定",
+//                                (dialog, what) -> {
+//                                    ToActivityUtil.toNextActivity(context, UserInfoEditActivity.class);
+//                                    dialog.dismiss();
+//                                })
+//                        .setNegativeButton("取消",
+//                                (dialog, what) -> dialog.dismiss()
+//                        )
+//                        .show();
+                ToActivityUtil.toNextActivity(context,UserInfoEditActivity.class);
                 break;
             }
             /* 问诊记录 */
@@ -147,5 +159,15 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         userName.setText(shar.getString("nickname",null));
         super.onResume();
+    }
+
+    @Override
+    public void isRight(boolean result, String reason, String picUrl) {
+        if (result){
+            Uri uri = Uri.fromFile(new File(picUrl));
+            userImage.setImageURI(uri);
+        }else{
+            Log.d(T,reason);
+        }
     }
 }

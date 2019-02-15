@@ -13,21 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
-import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
-import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.youth.banner.Banner;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.GlideImageLoader;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.LocalImageLoader;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.DrugsActivity;
-import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.MainActivity;
-
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.ManualTakingMedicationActivity;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -114,7 +107,7 @@ public class SelectFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_CODE);
                 break;
             case R.id.treat_bt:
-                Intent intent1 = new Intent(context, DrugsActivity.class);
+                Intent intent1 = new Intent(context, ManualTakingMedicationActivity.class);
                 startActivity(intent1);
                 break;
             default: {

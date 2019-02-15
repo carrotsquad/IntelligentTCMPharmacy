@@ -1,95 +1,52 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean;
 
 /**
- * Description:
+ * Description:  药材百科中，Medicine的具体成员变量
  * Created at: 2018/10/27 18:02
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
 public class DrugInfo {
-
-
     /**
-     * chineseName : 中文
-     * englishName : 英文
-     * category : 类属
-     * imagePath : 图片
-     * introduction : 介绍
-     * growthHabit : 生长环境
-     * medicinalValue : 药用价值
-     * character : 生长特性
+     * medicineName  药材名称
+     * medicinePic 药材图片的url地址
+     * intro   药材的简介
+     *  notice   注意事项或者，禁忌
      */
+    private String medicineName;
+    private String medicinePic;
+    private String  intro;
+    private String   notice;
 
-    private String chineseName;
-    private String englishName;
-    private String category;
-    private String imagePath;
-    private String introduction;
-    private String growthHabit;
-    private String medicinalValue;
-    private String character;
-
-    public String getChineseName() {
-        return chineseName;
+    public String getMedicineName() {
+        return medicineName;
     }
 
-    public void setChineseName(String chineseName) {
-        this.chineseName = chineseName;
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
     }
 
-    public String getEnglishName() {
-        return englishName;
+    public String getMedicinePic() {
+        return medicinePic;
     }
 
-    public void setEnglishName(String englishName) {
-        this.englishName = englishName;
+    public void setMedicinePic(String medicinePic) {
+        this.medicinePic = medicinePic;
     }
 
-    public String getCategory() {
-        return category;
+    public String getIntro() {
+        return intro;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setIntro(String intro) {
+        this.intro = intro;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getNotice() {
+        return notice;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
-
-    public String getGrowthHabit() {
-        return growthHabit;
-    }
-
-    public void setGrowthHabit(String growthHabit) {
-        this.growthHabit = growthHabit;
-    }
-
-    public String getMedicinalValue() {
-        return medicinalValue;
-    }
-
-    public void setMedicinalValue(String medicinalValue) {
-        this.medicinalValue = medicinalValue;
-    }
-
-    public String getCharacter() {
-        return character;
-    }
-
-    public void setCharacter(String character) {
-        this.character = character;
+    public void setNotice(String notice) {
+        this.notice = notice;
     }
 }
