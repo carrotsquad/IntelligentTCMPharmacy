@@ -19,9 +19,9 @@ import butterknife.ButterKnife;
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class TreatPerseonAdapter extends RecyclerView.Adapter<TreatPerseonAdapter.ViewHolder> {
     private Context mContext;

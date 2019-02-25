@@ -15,9 +15,9 @@ import retrofit2.Response;
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class UpdateNickNamePresenter extends BasePresenter<UpdateNickNameContract.updateNickNameView> implements UpdateNickNameContract.updateNickNamePresenter{
     private UpdateNickNameContract.updateNickNameModel  model;

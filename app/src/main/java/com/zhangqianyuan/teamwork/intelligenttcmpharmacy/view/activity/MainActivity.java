@@ -57,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
     private final int SEARCH_FRAGMENT = 1;
     private final int PERSONAGE_FRAGMENT = 2;
 
+    /**
+     * 上次点击返回键的时间
+     */
+    private long lastBackPressed;
+
+    /**
+     * 两次点击的间隔时间
+     */
+    private static final int QUIT_INTERVAL = 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,5 +162,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    /**
+     * 重写返回键响应函数，按两次才退出
+     */
+    @Override
+    public void onBackPressed() {
+        long backPressed = System.currentTimeMillis();
+        if (backPressed - lastBackPressed > QUIT_INTERVAL) {
+            lastBackPressed = backPressed;
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_LONG).show();
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
+
+}
 

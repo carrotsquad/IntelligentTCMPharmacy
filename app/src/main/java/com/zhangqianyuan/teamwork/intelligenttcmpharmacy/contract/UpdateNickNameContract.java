@@ -10,9 +10,9 @@ import retrofit2.Callback;
 /**
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public interface UpdateNickNameContract {
     @FunctionalInterface

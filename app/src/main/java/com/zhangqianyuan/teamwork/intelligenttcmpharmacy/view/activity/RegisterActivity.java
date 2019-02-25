@@ -38,7 +38,6 @@ import io.reactivex.schedulers.Schedulers;
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
-// TODO: 2018/11/24 需完善
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.RegisterView {
 
     @BindView(R.id.register_login_bt)

@@ -75,6 +75,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
     }
 

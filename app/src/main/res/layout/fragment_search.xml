@@ -7,176 +7,153 @@
     android:layout_height="match_parent"
     android:background="#FFF">
   <LinearLayout
+      android:layout_marginVertical="10dp"
       android:layout_width="match_parent"
-      android:layout_height="37dp"
+      android:layout_height="wrap_content"
       android:background="#fff"
-      android:orientation="horizontal">
+      android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="21dp"
-        android:src="@drawable/search1"/>
-
-    <EditText
+    <android.support.v7.widget.SearchView
+        app:iconifiedByDefault="false"
+        android:searchIcon="@drawable/search_icon_red"
         android:id="@+id/et_searchMedical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="14dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="14dp"
         android:layout_weight="1"
-        android:background="@null"
+        android:background="@drawable/searchview_shape"
         android:hint="搜索药材"
         android:textColorHint="#B6BAB9"
         android:textSize="14sp"/>
 
-    <ImageView
-        android:id="@+id/iv_clear"
-        android:visibility="gone"
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="14dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="14dp"
-        android:src="@drawable/clear"/>
-
-    <View
-        android:layout_width="0.67dp"
-        android:layout_height="20dp"
-        android:layout_gravity="center_vertical"
-        android:background="#D9D9D9"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-      <Button
-          android:id="@+id/btn_search"
-          android:layout_width="60dp"
-          android:layout_height="match_parent"
-          android:background="#FFF"
-          android:gravity="center"
-          android:text="搜索"
-          android:textColor="#e53935"
-          android:textSize="14sp"/>
-    </LinearLayout>
-  </LinearLayout>
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="5dp"
-      android:background="#E8EDF3"/>
-
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:id="@+id/search_result"
+        android:text="历史搜索"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"/>
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:layout_marginHorizontal="14dp"
+        android:id="@+id/flowlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
+    </com.zhy.view.flowlayout.TagFlowLayout>
+  </LinearLayout>
 
-      <LinearLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_margin="20dp"
-          android:orientation="horizontal">
+  <!--<ScrollView-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content">-->
 
-        <TextView
-            android:id="@+id/medical_name"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:textSize="40dp" />
+    <!--<LinearLayout-->
+        <!--android:id="@+id/search_result"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:textSize="20dp" />
-      </LinearLayout>
-      <TextView
-          android:id="@+id/introduction"
-          style="@style/TextAppearance.AppCompat.Title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:paddingBottom="16dp"
-          android:layout_marginLeft="20dp"
-          android:layout_marginTop="20dp"
-          android:text="简介" />
-      <TextView
-          android:id="@+id/introduction_content"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:textSize="17dp"
-          android:layout_marginRight="10dp"
-          android:layout_marginLeft="10dp"/>
+      <!--<LinearLayout-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_margin="20dp"-->
+          <!--android:orientation="horizontal">-->
 
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="5dp"
-          android:background="#E8EDF3" />
+        <!--<TextView-->
+            <!--android:id="@+id/medical_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:textSize="40dp" />-->
 
-      <TextView
-          android:id="@+id/growth_habit"
-          style="@style/TextAppearance.AppCompat.Title"
-          android:layout_width="100dp"
-          android:layout_height="40dp"
-          android:layout_marginLeft="20dp"
-          android:layout_marginTop="20dp"
-          android:text="生长环境" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:textSize="20dp" />-->
+      <!--</LinearLayout>-->
+      <!--<TextView-->
+          <!--android:id="@+id/introduction"-->
+          <!--style="@style/TextAppearance.AppCompat.Title"-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:paddingBottom="16dp"-->
+          <!--android:layout_marginLeft="20dp"-->
+          <!--android:layout_marginTop="20dp"-->
+          <!--android:text="简介" />-->
+      <!--<TextView-->
+          <!--android:id="@+id/introduction_content"-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:textSize="17dp"-->
+          <!--android:layout_marginRight="10dp"-->
+          <!--android:layout_marginLeft="10dp"/>-->
 
+      <!--<View-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="5dp"-->
+          <!--android:background="#E8EDF3" />-->
 
-      <TextView
-          android:id="@+id/growth_habit_content"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:textSize="17dp"
-          android:layout_marginRight="10dp"
-          android:layout_marginLeft="10dp"/>
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="5dp"
-          android:background="#E8EDF3" />
-
-      <TextView
-          android:id="@+id/medicinal_value"
-          style="@style/TextAppearance.AppCompat.Title"
-          android:layout_width="100dp"
-          android:layout_height="40dp"
-          android:layout_marginLeft="20dp"
-          android:layout_marginTop="20dp"
-          android:text="药用价值" />
-
-      <TextView
-          android:id="@+id/medicinal_value_content"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:textSize="17dp"
-          android:layout_marginRight="10dp"
-          android:layout_marginLeft="10dp"/>
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="5dp"
-          android:background="#E8EDF3" />
-
-      <TextView
-          android:id="@+id/character"
-          style="@style/TextAppearance.AppCompat.Title"
-          android:layout_width="100dp"
-          android:layout_height="40dp"
-          android:layout_marginLeft="20dp"
-          android:layout_marginTop="20dp"
-          android:text="特点" />
+      <!--<TextView-->
+          <!--android:id="@+id/growth_habit"-->
+          <!--style="@style/TextAppearance.AppCompat.Title"-->
+          <!--android:layout_width="100dp"-->
+          <!--android:layout_height="40dp"-->
+          <!--android:layout_marginLeft="20dp"-->
+          <!--android:layout_marginTop="20dp"-->
+          <!--android:text="生长环境" />-->
 
 
-      <TextView
-          android:id="@+id/character_content"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:textSize="17dp"
-          android:layout_marginRight="10dp"
-          android:layout_marginLeft="10dp"/>
-    </LinearLayout>
-  </ScrollView>
+      <!--<TextView-->
+          <!--android:id="@+id/growth_habit_content"-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:textSize="17dp"-->
+          <!--android:layout_marginRight="10dp"-->
+          <!--android:layout_marginLeft="10dp"/>-->
+
+      <!--<View-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="5dp"-->
+          <!--android:background="#E8EDF3" />-->
+
+      <!--<TextView-->
+          <!--android:id="@+id/medicinal_value"-->
+          <!--style="@style/TextAppearance.AppCompat.Title"-->
+          <!--android:layout_width="100dp"-->
+          <!--android:layout_height="40dp"-->
+          <!--android:layout_marginLeft="20dp"-->
+          <!--android:layout_marginTop="20dp"-->
+          <!--android:text="药用价值" />-->
+
+      <!--<TextView-->
+          <!--android:id="@+id/medicinal_value_content"-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:textSize="17dp"-->
+          <!--android:layout_marginRight="10dp"-->
+          <!--android:layout_marginLeft="10dp"/>-->
+
+      <!--<View-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="5dp"-->
+          <!--android:background="#E8EDF3" />-->
+
+      <!--<TextView-->
+          <!--android:id="@+id/character"-->
+          <!--style="@style/TextAppearance.AppCompat.Title"-->
+          <!--android:layout_width="100dp"-->
+          <!--android:layout_height="40dp"-->
+          <!--android:layout_marginLeft="20dp"-->
+          <!--android:layout_marginTop="20dp"-->
+          <!--android:text="特点" />-->
+
+
+      <!--<TextView-->
+          <!--android:id="@+id/character_content"-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:textSize="17dp"-->
+          <!--android:layout_marginRight="10dp"-->
+          <!--android:layout_marginLeft="10dp"/>-->
+    <!--</LinearLayout>-->
+  <!--</ScrollView>-->
 
 </LinearLayout>
