@@ -25,6 +25,12 @@
         android:hint="搜索药材"
         android:textColorHint="#B6BAB9"
         android:textSize="14sp"/>
+    <ListView
+        android:id="@+id/lv"
+        android:layout_marginHorizontal="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <TextView
         android:layout_marginTop="10dp"

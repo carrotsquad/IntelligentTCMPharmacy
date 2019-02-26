@@ -7,9 +7,9 @@ import java.util.List;
  * 药方
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class Prescription {
     //用户自己输入的症状/我们提供的症状

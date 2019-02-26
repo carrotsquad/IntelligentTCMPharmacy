@@ -1,5 +1,6 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network;
 
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugSearchBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.RegisterOrLogInFeedbackBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.UpdateNickNameorPassWordBean;
 
@@ -8,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -40,4 +42,9 @@ public interface Api {
     @FormUrlEncoded
     @POST("/autoMedicine/changePassword")
     Call<UpdateNickNameorPassWordBean> UpdatePassWord(@Field("tele") String phonenumber,@Field("newPassword") String newPassWord);
+
+    @GET("/autoMedicine/getMedicines")
+    Observable<DrugSearchBean> getSearchResult();
+
+
 }

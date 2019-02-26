@@ -24,7 +24,6 @@ public class BaseModel {
     private String baseUrl = "https://www.jintianlixia.cn";
 
     public BaseModel() {
-
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override public void log(String message) {
                 //打印retrofit日志

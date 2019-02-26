@@ -5,9 +5,9 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean;
  * 单个药方
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class DrugAndMass {
     //药名

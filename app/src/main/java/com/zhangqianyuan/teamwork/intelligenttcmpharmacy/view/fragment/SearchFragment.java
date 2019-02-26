@@ -3,24 +3,34 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugSearchBean;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.Medicine;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.SearchContract;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.MedicineSearchPresenter;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,24 +44,7 @@ import butterknife.ButterKnife;
  * Email: zhang.qianyuan@foxmail.com
  */
 //TODO:Tag选项，recyclerView
-public class SearchFragment extends Fragment{
-
-
-//    //药物简介
-//    @BindView(R.id.introduction_content)
-//    TextView introduction;
-//
-//    //生长环境
-//    @BindView(R.id.growth_habit_content)
-//    TextView  growth;
-//
-//    //药用价值
-//    @BindView(R.id.medicinal_value_content)
-//    TextView  way;
-//
-//    //特点
-//    @BindView(R.id.character_content)
-//    TextView  character;
+public class SearchFragment extends Fragment implements SearchContract.SearchView {
 
     @BindView(R.id.et_searchMedical)
     SearchView search;
@@ -59,23 +52,30 @@ public class SearchFragment extends Fragment{
     @BindView(R.id.flowlayout)
     TagFlowLayout tagFlowLayout;
 
+    @BindView(R.id.lv)
+    ListView listView;
+
     private View view;
     private Context context;
 
+    //全局药的list
+    public static ArrayList<Medicine> medicineArrayList=new ArrayList<>();
+    public static ArrayList<String> drugnamelist=new ArrayList<>();
+
     //Tags的文字
     private List<String> mVals;
+    private MedicineSearchPresenter searchPresenter;
 
     public static Fragment newInstance(){
         SearchFragment fragment = new SearchFragment();
         return fragment;
-
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search, null);
-        context = getContext();
+        context = getActivity();
         initView(view);
         return view;
     }
@@ -83,6 +83,10 @@ public class SearchFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        searchPresenter=new MedicineSearchPresenter();
+        searchPresenter.attachActivty(this);
+        //TODO:API待完善
+//        searchPresenter.getSearchResult();
     }
 
     @Override
@@ -92,17 +96,28 @@ public class SearchFragment extends Fragment{
 
     private void initView(View view){
         ButterKnife.bind(this,view);
+        listView.setTextFilterEnabled(true);
+        listView.setAdapter(new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,drugnamelist));
+        search.setSubmitButtonEnabled(true);
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                listView.setFilterText(query);
+                return true;
             }
 
+            //过滤
             @Override
             public boolean onQueryTextChange(String newText) {
+                if("".equals(newText)){
+                    listView.clearTextFilter();
+                }else {
+                    listView.setFilterText(newText);
+                }
                 return false;
             }
         });
+
         //TODO:待完善
         tagFlowLayout.setAdapter(new TagAdapter<String>(mVals) {
             @Override
@@ -120,4 +135,14 @@ public class SearchFragment extends Fragment{
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void acquireSearchResult(DrugSearchBean searchBean) {
+        if(searchBean.getResult()){
+            medicineArrayList=searchBean.getMedicineList();
+            medicineArrayList.forEach(e->drugnamelist.add(e.getMedicineName()));
+        }else {
+            Toast.makeText(getContext(),"获取药材信息失败",Toast.LENGTH_SHORT).show();
+        }
+    }
 }
