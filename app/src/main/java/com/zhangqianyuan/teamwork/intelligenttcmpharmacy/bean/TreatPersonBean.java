@@ -5,9 +5,9 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean;
  * 患者 类
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class TreatPersonBean {
     /**

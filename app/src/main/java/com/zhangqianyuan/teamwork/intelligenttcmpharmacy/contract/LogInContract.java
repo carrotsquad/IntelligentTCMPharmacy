@@ -18,7 +18,7 @@ import io.reactivex.Observer;
 public interface LogInContract {
     @FunctionalInterface
     interface LogInView extends BaseView {
-        void onResult(Boolean isright, String info);
+        void onResult(Boolean isright, String name,String info);
     }
 
     @FunctionalInterface

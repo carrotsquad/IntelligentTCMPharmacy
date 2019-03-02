@@ -99,11 +99,11 @@
     </LinearLayout>
 
     <android.support.constraint.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.22" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"

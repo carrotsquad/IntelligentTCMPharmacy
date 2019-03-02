@@ -4,9 +4,9 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean;
  * Description  改密码个昵称
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class UpdateNickNameorPassWordBean {
     private Boolean result;

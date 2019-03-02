@@ -7,9 +7,9 @@ import java.util.List;
  * 药方
  * @author zhoudada
  * @version $Rev$
- * @des ${TODO}
+ * @des
  * @updateAuthor $Author$
- * @updateDes ${TODO}
+ * @updateDes
  */
 public class Prescription {
     /**

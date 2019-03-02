@@ -3,6 +3,15 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean;
 public class RegisterOrLogInFeedbackBean {
     private Boolean result;
     private String reason;
+    private String name;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public Boolean getResult() {
         return result;
