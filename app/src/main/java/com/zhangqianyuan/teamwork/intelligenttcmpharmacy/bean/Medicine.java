@@ -1,5 +1,14 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean;
 
+/**
+ * @Description: 药材百科bean
+ * Created at: 2019/3/2 19:34
+ * @author: zhangqianyuan
+ * @Email: zhang.qianyuan@foxmail.com
+ * @version:
+ * @updateAuthor:
+ * @updateDes:
+ */
 public class Medicine {
     private String medicineName;
     private String medicinePic;

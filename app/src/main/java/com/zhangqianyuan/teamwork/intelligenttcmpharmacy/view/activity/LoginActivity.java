@@ -2,6 +2,7 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -40,9 +41,15 @@ public class LoginActivity extends AppCompatActivity implements LogInContract.Lo
     @BindView(R.id.register_bt)
     Button register;    //注册按钮
 
+    public static final String USER_PHONE = "userphone";
+    public static final String USER_PASSWORD = "userpassword";
+    public static final String USER_NAME = "username";
+
     private LogInPresenter logInPresenter;
     private String pwd = "";
     private String tele = "";
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,15 @@ public class LoginActivity extends AppCompatActivity implements LogInContract.Lo
         ButterKnife.bind(this);
         logInPresenter = new LogInPresenter();
         logInPresenter.attachActivty(this);
+        sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        if (!"".equals(sharedPreferences.getString(USER_PHONE, "null")) && !"".equals(sharedPreferences.getString(USER_PASSWORD, ""))) {
+
+        } else {
+            passwords.setText(sharedPreferences.getString(USER_PASSWORD,""));
+            userName.setText(sharedPreferences.getString(USER_PHONE,""));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -65,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements LogInContract.Lo
             case R.id.login_bt: {
                 //在服务器进行信息比对决定是否登陆
                 if (isFormCompleted()) {
-                    logInPresenter.getLogIn(tele,pwd);
+                    logInPresenter.getLogIn(tele, pwd);
                 } else {
                     Toast.makeText(this, "请填写完整", Toast.LENGTH_SHORT).show();
                 }
@@ -85,14 +101,21 @@ public class LoginActivity extends AppCompatActivity implements LogInContract.Lo
 
     //检查表单是否填写完整
     private boolean isFormCompleted() {
-        pwd=passwords.getText().toString();
-        tele=userName.getText().toString();
-        return ((!"".equals(pwd))||(!"".equals(tele)));
+        pwd = passwords.getText().toString();
+        tele = userName.getText().toString();
+        return ((!"".equals(pwd)) || (!"".equals(tele)));
     }
 
     @Override
-    public void onResult(Boolean isright, String info) {
+    public void onResult(Boolean isright, String name, String info) {
         if (isright) {
+            pwd = passwords.getText().toString();
+            tele = userName.getText().toString();
+            editor = sharedPreferences.edit();
+            editor.putString(USER_NAME, name);
+            editor.putString(USER_PASSWORD, pwd);
+            editor.putString(USER_PHONE, tele);
+            editor.commit();
             Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();

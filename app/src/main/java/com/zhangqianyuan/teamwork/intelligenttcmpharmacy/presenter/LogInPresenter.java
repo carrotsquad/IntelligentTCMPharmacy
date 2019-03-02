@@ -39,9 +39,9 @@ public class LogInPresenter extends BasePresenter<LogInContract.LogInView> imple
             public void onNext(RegisterOrLogInFeedbackBean registerOrLogInFeedbackBean) {
                 if(isAttachActivity()){
                     if(registerOrLogInFeedbackBean==null){
-                        v.onResult(false,"发生了一点意外");
+                        v.onResult(false,"","发生了一点意外");
                     }else {
-                        v.onResult(registerOrLogInFeedbackBean.getResult(),registerOrLogInFeedbackBean.getReason());
+                        v.onResult(registerOrLogInFeedbackBean.getResult(),registerOrLogInFeedbackBean.getName(),registerOrLogInFeedbackBean.getReason());
                     }
                 }
             }

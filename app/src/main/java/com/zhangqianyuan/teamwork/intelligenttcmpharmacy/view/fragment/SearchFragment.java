@@ -9,7 +9,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +23,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.adapter.SearchItemAdapter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugSearchBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.Medicine;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.SearchContract;
@@ -35,11 +41,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.finalteam.toolsfinal.Logger;
 
 
 /**
  * Description: 搜索fragment
  * Created at: 2018/10/21 11:20
+ *
  * @author: zhangqianyuan
  * Email: zhang.qianyuan@foxmail.com
  */
@@ -50,23 +58,35 @@ public class SearchFragment extends Fragment implements SearchContract.SearchVie
     SearchView search;
 
     @BindView(R.id.flowlayout)
-    TagFlowLayout tagFlowLayout;
+    TagFlowLayout historySearchTagFlowLayout;
 
-    @BindView(R.id.lv)
-    ListView listView;
+    @BindView(R.id.findflowlayout)
+    TagFlowLayout findTagFlowLayout;
+
+    @BindView(R.id.erv)
+    EasyRecyclerView easyRecyclerView;
+
+    private SearchItemAdapter searchItemAdapter;
 
     private View view;
     private Context context;
 
     //全局药的list
-    public static ArrayList<Medicine> medicineArrayList=new ArrayList<>();
-    public static ArrayList<String> drugnamelist=new ArrayList<>();
+    public static ArrayList<Medicine> medicineArrayList = new ArrayList<>();
+    public static ArrayList<String> drugnamelist = new ArrayList<>();
 
     //Tags的文字
-    private List<String> mVals;
+    private ArrayList<String> historySearchVals=new ArrayList<>();
+
+    private ArrayList<String> findSearchVals=new ArrayList<>();
+    private TagAdapter<String> historySearchTagAdapter;
+
+    private TagAdapter<String> findSearchTagAdapter;
+
+
     private MedicineSearchPresenter searchPresenter;
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         SearchFragment fragment = new SearchFragment();
         return fragment;
     }
@@ -76,56 +96,93 @@ public class SearchFragment extends Fragment implements SearchContract.SearchVie
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search, null);
         context = getActivity();
-        initView(view);
+        historySearchVals.add("当归");
+        historySearchVals.add("枸杞");
+        historySearchTagAdapter= new TagAdapter<String>(historySearchVals) {
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView textView=new TextView(parent.getContext());
+                textView.setText(s);
+                return textView;
+            }
+        };
+        findSearchTagAdapter= new TagAdapter<String>(findSearchVals) {
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView textView=new TextView(parent.getContext());
+                textView.setText(s);
+                return textView;
+            }
+        };
+
+        searchPresenter = new MedicineSearchPresenter();
+        searchPresenter.attachActivty(this);
+        initView();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        searchPresenter=new MedicineSearchPresenter();
-        searchPresenter.attachActivty(this);
-        //TODO:API待完善
-//        searchPresenter.getSearchResult();
     }
 
     @Override
     public void onDestroyView() {
+        searchPresenter.dettachActivity();
         super.onDestroyView();
     }
 
-    private void initView(View view){
-        ButterKnife.bind(this,view);
-        listView.setTextFilterEnabled(true);
-        listView.setAdapter(new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,drugnamelist));
+    private void initView() {
+        ButterKnife.bind(this, view);
+        //TODO:easyRecyclerView不显示
+        searchItemAdapter=new SearchItemAdapter(getActivity());
+        easyRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        easyRecyclerView.setAdapter(searchItemAdapter);
+
+        easyRecyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
+        //TODO:待完善
+        searchItemAdapter.setOnItemClickListener(position->{
+
+        });
+
         search.setSubmitButtonEnabled(true);
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                listView.setFilterText(query);
+
                 return true;
             }
 
-            //过滤
             @Override
             public boolean onQueryTextChange(String newText) {
-                if("".equals(newText)){
-                    listView.clearTextFilter();
-                }else {
-                    listView.setFilterText(newText);
+                if ("".equals(newText)) {
+
+                } else {
+
                 }
                 return false;
             }
         });
 
-        //TODO:待完善
-        tagFlowLayout.setAdapter(new TagAdapter<String>(mVals) {
-            @Override
-            public View getView(FlowLayout parent, int position, String s) {
-                return null;
-            }
+        findTagFlowLayout.setAdapter(findSearchTagAdapter);
+
+        findTagFlowLayout.setOnTagClickListener((View v, int position, FlowLayout parent)-> {
+            return false;
         });
 
+
+        historySearchTagFlowLayout.setAdapter(historySearchTagAdapter);
+
+        //TODO:待完善
+        historySearchTagFlowLayout.setOnTagClickListener((View v, int position, FlowLayout parent)-> {
+                return false;
+            });
+        searchPresenter.getSearchResult();
     }
 
     @Nullable
@@ -138,11 +195,17 @@ public class SearchFragment extends Fragment implements SearchContract.SearchVie
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void acquireSearchResult(DrugSearchBean searchBean) {
-        if(searchBean.getResult()){
-            medicineArrayList=searchBean.getMedicineList();
-            medicineArrayList.forEach(e->drugnamelist.add(e.getMedicineName()));
-        }else {
-            Toast.makeText(getContext(),"获取药材信息失败",Toast.LENGTH_SHORT).show();
+        if (searchBean.getResult()) {
+            medicineArrayList = searchBean.getMedicineList();
+            medicineArrayList.forEach(e -> {
+                searchItemAdapter.add(e);
+                drugnamelist.add(e.getMedicineName());});
+            searchItemAdapter.notifyDataSetChanged();
+            Log.e("SearchFragment", drugnamelist.toString());
+            Log.e("SearchFragment", medicineArrayList.get(0).getMedicinePic());
+            Log.e("SearchFragment", medicineArrayList.get(0).getIntro());
+        } else {
+            Toast.makeText(getContext(), "获取药材信息失败", Toast.LENGTH_SHORT).show();
         }
     }
 }
