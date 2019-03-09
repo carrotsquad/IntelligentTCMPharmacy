@@ -51,5 +51,9 @@ public interface Api {
     @FormUrlEncoded
     Call<GetUserPictureBean>   getUserPic(@Field("tele") String phonenumber);
 
+    @POST("/autoMedicine/getPrescriptionSelf")
+    @FormUrlEncoded
+    Call<>
+
 
 }

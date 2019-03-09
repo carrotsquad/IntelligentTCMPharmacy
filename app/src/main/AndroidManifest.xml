@@ -61,7 +61,10 @@
             android:name=".view.activity.UpdateNickNameActivity"
             android:label="修改昵称" />
         <activity android:name=".view.activity.UpdatePassWordsActivity" />
-        <activity android:name=".view.activity.ManualTakingMedicationActivity"></activity>
+        <activity android:name=".view.activity.ManualTakingMedicationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/noActionBar2"
+           > </activity>
     </application>
 
 </manifest>

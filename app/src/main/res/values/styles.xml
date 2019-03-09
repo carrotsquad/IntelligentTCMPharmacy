@@ -77,4 +77,24 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
     </style>
+
+    <!--标题与NavagationIcon的距离-->
+    <style name = "toolbar.Mystle" parent = "Base.Widget.AppCompat.Toolbar">
+        <item name = "contentInsetStart" >0dp</item>
+        <item name = "contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+    <!-- toolbar 标题文字大小-->
+    <style name = "toolbar.TitleSize" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize" >15sp</item>
+    </style>
+
+    <style name="noActionBar2" parent="AppTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <!--设置menu中item的图标颜色-->
+        <item name="android:textColorSecondary">#ffffff</item>
+    </style>
 </resources>

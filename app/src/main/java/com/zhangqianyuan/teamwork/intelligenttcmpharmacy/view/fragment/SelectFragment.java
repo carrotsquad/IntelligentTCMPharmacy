@@ -18,6 +18,7 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.youth.banner.Banner;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.LocalImageLoader;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ToActivityUtil;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.ManualTakingMedicationActivity;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +32,9 @@ public class SelectFragment extends Fragment {
 
 
     @BindView(R.id.prescribe_bt)
-    ImageView mPrescribeBt;
+    ImageView selfTake;
     @BindView(R.id.treat_bt)
-    ImageView mTreatBt;
+    ImageView intelTake;
     @BindView(R.id.banner)
     Banner mBanner;
 
@@ -103,8 +104,7 @@ public class SelectFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.prescribe_bt:
-                Intent intent = new Intent(context, CaptureActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
+                ToActivityUtil.toNextActivity(getActivity(),ManualTakingMedicationActivity.class);
                 break;
             case R.id.treat_bt:
                 Intent intent1 = new Intent(context, ManualTakingMedicationActivity.class);

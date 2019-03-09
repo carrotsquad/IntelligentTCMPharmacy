@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.activity.ManualTakingMedicationActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/self_tack_toolbar"
+        style = "@style/toolbar.Mystle"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextAppearance="@style/toolbar.TitleSize"
+        app:titleTextColor="@android:color/white"
+        />
+    <android.support.v7.widget.SearchView
+        android:id="@+id/self_take_med_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/searchview_shape"
+        android:hint="搜索药材"
+        android:searchIcon="@drawable/search_icon_red"
+        android:textColorHint="#B6BAB9"
+        android:textSize="14sp"
+        app:queryHint="请输入搜索内容">
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.SearchView>
+
+
+
+
+</LinearLayout>
