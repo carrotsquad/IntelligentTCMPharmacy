@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/flowlayout_tvshape"
+    android:layout_marginHorizontal="5dp">
+
+    <TextView
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="2dp"
+        android:text="null"
+        android:id="@+id/fl_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

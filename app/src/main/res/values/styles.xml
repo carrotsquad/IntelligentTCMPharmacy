@@ -19,6 +19,11 @@
         <item name="colorControlNormal">@color/black</item>
     </style>
 
+    <style name="PopUpWindowShow" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/alpha1</item>
+        <item name="android:windowExitAnimation">@anim/alpha2</item>
+    </style>
+
     <style name="WhiteToolbarStyle" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <item name="colorControlNormal">@color/white</item>
     </style>
