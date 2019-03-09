@@ -21,7 +21,7 @@ import butterknife.OnClick;
 /**
  * 修改密码界面
  */
-public class UpdatePassWords extends AppCompatActivity implements UpdatePassWordContract.updatePassWordView {
+public class UpdatePassWordsActivity extends AppCompatActivity implements UpdatePassWordContract.updatePassWordView {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -54,9 +54,9 @@ public class UpdatePassWords extends AppCompatActivity implements UpdatePassWord
     //初始化界面
     public void initView(){
         setSupportActionBar(mToolbar);
-        shar = getSharedPreferences("users",MODE_PRIVATE);
+        shar = getSharedPreferences("user",MODE_PRIVATE);
         mEditor = shar.edit();
-        oldPsWord = shar.getString("password",null);
+        oldPsWord = shar.getString("userpassword",null);
         mUpdatePassWordPresenter = new UpdatePassWordPresenter();
         mUpdatePassWordPresenter.attachActivty(this);
     }
@@ -100,9 +100,9 @@ public class UpdatePassWords extends AppCompatActivity implements UpdatePassWord
         if (isEverythingRight()){
             //上传新密码到后端，同时将新密码存到shar
             String password = newPsInput.getText().toString();
-            String tell = shar.getString("phonenumber",null);
+            String tell = shar.getString("userphone",null);
             mUpdatePassWordPresenter.updatePassWord(tell,password);
-            mEditor.putString("password",newPsInput.getText().toString());
+            mEditor.putString("userpassword",newPsInput.getText().toString());
             mEditor.commit();
         }
     }
@@ -111,7 +111,6 @@ public class UpdatePassWords extends AppCompatActivity implements UpdatePassWord
     public void isRight(boolean result, String reason) {
         if (result){
             Toast.makeText(this,"操作成功",Toast.LENGTH_SHORT).show();
-            finish();
         }else {
             Toast.makeText(this,"操作失败\n"+reason,Toast.LENGTH_SHORT).show();
         }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.Medicine;

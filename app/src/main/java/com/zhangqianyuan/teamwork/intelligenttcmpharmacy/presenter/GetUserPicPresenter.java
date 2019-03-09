@@ -8,6 +8,8 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.model.BaseModel;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network.Api;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.base.BasePresenter;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,8 +39,13 @@ public class GetUserPicPresenter extends BasePresenter<GetUserPictureContract.Ge
             model.getUserPic(tell, new Callback<GetUserPictureBean>() {
                 @Override
                 public void onResponse(Call<GetUserPictureBean> call, Response<GetUserPictureBean> response) {
-                    if (response.body()!=null)
-                        v.isRight(response.body().isResult(),response.body().getReason(),response.body().getUserPicUrl());
+                    if (response.body()!=null){
+                        try {
+                            v.isRight(response.body().isResult(),response.body().getReason(),response.body().getUserPicUrl());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d(T,"成功了"+response.body().isResult());}
                     else
                         Log.d(T,"response is null");
                 }

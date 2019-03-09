@@ -36,8 +36,9 @@ public class UpdatePassWordPresenter extends BasePresenter<UpdatePassWordContrac
         model.updatePassWord(tell, newPassWord, new Callback<UpdateNickNameorPassWordBean>() {
             @Override
             public void onResponse(Call<UpdateNickNameorPassWordBean> call, Response<UpdateNickNameorPassWordBean> response) {
-                if (response.body()!=null)
+                if (response.body()!=null){
                     v.isRight(response.body().getResult(),response.body().getReason());
+                    Log.d(T,"成功了"+response.body());}
                 else
                     Log.d(T,"response is null");
             }

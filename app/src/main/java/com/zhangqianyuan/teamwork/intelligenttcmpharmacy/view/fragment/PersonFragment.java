@@ -1,9 +1,12 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
@@ -28,6 +31,9 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.CircleImageView;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.MaskableImageView;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 
@@ -59,23 +65,21 @@ public class PersonFragment extends Fragment implements View.OnClickListener,Get
     private Context context;
     private View view;
     private GetUserPicPresenter  mPresenter;
+    private SharedPreferences.Editor  mEditor;
     private SharedPreferences shar;
-    public static Fragment newInstance(){
-        PersonFragment personFragment = new PersonFragment();
-        return personFragment;
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_personage, container, false);
         initView();
-        shar = getActivity().getSharedPreferences("users",Context.MODE_PRIVATE);
-        userName.setText(shar.getString("nickname",null));
+        shar = getActivity().getSharedPreferences("user",Context.MODE_PRIVATE);
+        mEditor = shar.edit();
+        userName.setText(shar.getString("username",null));
         context = getContext();
         mPresenter = new GetUserPicPresenter();
         mPresenter.attachActivty(this);
-        mPresenter.getUserPic(shar.getString("phone",null));
+        mPresenter.getUserPic(shar.getString("userphone",null));
         return view;
     }
 
@@ -109,24 +113,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener,Get
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.user_image:{
-                //进行弹窗显示
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                builder.setTitle(R.string.remind)
-//                        .setMessage(R.string.need_to_go_to_user_setting)
-//                        .setCancelable(true)
-//                        .setPositiveButton("确定",
-//                                (dialog, what) -> {
-//                                    ToActivityUtil.toNextActivity(context, UserInfoEditActivity.class);
-//                                    dialog.dismiss();
-//                                })
-//                        .setNegativeButton("取消",
-//                                (dialog, what) -> dialog.dismiss()
-//                        )
-//                        .show();
                 ToActivityUtil.toNextActivity(context,UserInfoEditActivity.class);
                 break;
             }
-            /* 问诊记录 */
+            /* 取药记录 */
             case R.id.presribe_bt:
 
                 break;
@@ -142,9 +132,9 @@ public class PersonFragment extends Fragment implements View.OnClickListener,Get
                 startActivity(alarm);
                 break;
             }
-            /* 就诊记录 */
+            /* 个人资料 */
             case R.id.treat_record_bt:
-
+                ToActivityUtil.toNextActivity(this.getContext(),UserInfoEditActivity.class);
                 break;
             /* 产生二维码 */
             case R.id.generate_qb:
@@ -163,12 +153,41 @@ public class PersonFragment extends Fragment implements View.OnClickListener,Get
     }
 
     @Override
-    public void isRight(boolean result, String reason, String picUrl) {
+    public void isRight(boolean result, String reason, String picUrl) throws IOException {
         if (result){
-            Uri uri = Uri.fromFile(new File(picUrl));
-            userImage.setImageURI(uri);
+            mEditor.putString("userpic",picUrl);
+            mEditor.commit();
+            Log.d("fuck","方法执行了");
+            getBitmapFromUrl(picUrl,userImage,getActivity());
         }else{
             Log.d(T,reason);
         }
+    }
+
+    public static void  getBitmapFromUrl(String url,CircleImageView imageView,Activity activity) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url1 = new URL(url);
+                    InputStream in = url1.openStream();
+                    Bitmap bm = BitmapFactory.decodeStream(in);
+                    if (bm == null)
+                        Log.d("fuck", "2方法执行了");
+                    setImageFromBitMap(activity,imageView,bm);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public static void setImageFromBitMap(Activity activity,CircleImageView view,Bitmap bitmap){
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                view.setImageBitmap(bitmap);
+            }
+        });
     }
 }

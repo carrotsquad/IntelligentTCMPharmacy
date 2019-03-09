@@ -58,9 +58,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.UpdateNickName"
+            android:name=".view.activity.UpdateNickNameActivity"
             android:label="修改昵称" />
-        <activity android:name=".view.activity.UpdatePassWords" />
+        <activity android:name=".view.activity.UpdatePassWordsActivity" />
         <activity android:name=".view.activity.ManualTakingMedicationActivity"></activity>
     </application>
 

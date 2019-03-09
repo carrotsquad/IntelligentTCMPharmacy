@@ -59,11 +59,12 @@ public class LoginActivity extends AppCompatActivity implements LogInContract.Lo
         logInPresenter = new LogInPresenter();
         logInPresenter.attachActivty(this);
         sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
-        if (!"".equals(sharedPreferences.getString(USER_PHONE, "null")) && !"".equals(sharedPreferences.getString(USER_PASSWORD, ""))) {
+        if ("".equals(sharedPreferences.getString(USER_PHONE, "")) || "".equals(sharedPreferences.getString(USER_PASSWORD, ""))) {
 
         } else {
             passwords.setText(sharedPreferences.getString(USER_PASSWORD,""));
             userName.setText(sharedPreferences.getString(USER_PHONE,""));
+
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }

@@ -1,6 +1,7 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugSearchBean;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.GetUserPictureBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.RegisterOrLogInFeedbackBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.UpdateNickNameorPassWordBean;
 
@@ -45,6 +46,10 @@ public interface Api {
 
     @GET("/autoMedicine/getMedicines")
     Observable<DrugSearchBean> getSearchResult();
+
+    @POST("/autoMedicine/getUserPic")
+    @FormUrlEncoded
+    Call<GetUserPictureBean>   getUserPic(@Field("tele") String phonenumber);
 
 
 }

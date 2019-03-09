@@ -37,7 +37,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_weight="1"
-                android:src="@drawable/prescribe_bt_ic" />
+                android:src="@drawable/self_take_med" />
 
             <ImageView
                 android:id="@+id/treat_bt"
@@ -49,7 +49,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_weight="1"
-                android:src="@drawable/treat_bt" />
+                android:src="@drawable/intel_take_med" />
         </LinearLayout>
     </LinearLayout>
 

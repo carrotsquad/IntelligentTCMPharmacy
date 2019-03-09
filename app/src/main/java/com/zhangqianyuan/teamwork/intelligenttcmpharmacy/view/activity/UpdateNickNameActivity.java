@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,8 +26,8 @@ import retrofit2.Callback;
 /**
  * 修改昵称界面
  */
-public class UpdateNickName extends AppCompatActivity implements UpdateNickNameContract.updateNickNameView {
-
+public class UpdateNickNameActivity extends AppCompatActivity implements UpdateNickNameContract.updateNickNameView {
+    public static final String T = "UpdateNickNameActivity";
     @BindView(R.id.nick_name_bar)
     Toolbar    mToolbar;
 
@@ -39,7 +40,7 @@ public class UpdateNickName extends AppCompatActivity implements UpdateNickNameC
     @BindView(R.id.cancel_nick)
     Button    cancelBt;
 
-    @BindView(R.id.new_nickname_text)
+    @BindView(R.id.new_nickname_input)
     EditText  newNickName;
 
     private SharedPreferences shar ;
@@ -61,9 +62,10 @@ public class UpdateNickName extends AppCompatActivity implements UpdateNickNameC
         //设置光标不显示
         newNickName.setCursorVisible(false);
         //得到旧昵称
-        shar = getSharedPreferences("users",MODE_PRIVATE);
+        shar = getSharedPreferences("user",MODE_PRIVATE);
         edit = shar.edit();
-        String oldName = shar.getString("nickname",null);
+        String oldName = shar.getString("username",null);
+        Log.d(T,""+oldName);
         oldNickName.setText(oldName);
     }
 
@@ -74,8 +76,10 @@ public class UpdateNickName extends AppCompatActivity implements UpdateNickNameC
                 if (TextUtils.isEmpty(newNickName.getText())){
                     Toast.makeText(this,"昵称不能为空",Toast.LENGTH_SHORT).show();
                 }else{
-                    mUpdateNickNamePresenter.updateNickName(shar.getString("phonenumber",null),newNickName.getText().toString());
-                    edit.putString("nickname",newNickName.getText().toString());
+                    String tell = shar.getString("userphone",null);
+                    Log.d(T,"userphone="+tell);
+                    mUpdateNickNamePresenter.updateNickName(tell,newNickName.getText().toString());
+                    edit.putString("username",newNickName.getText().toString());
                     edit.commit();
                 }
                 break;
@@ -99,4 +103,6 @@ public class UpdateNickName extends AppCompatActivity implements UpdateNickNameC
         super.onDestroy();
         mUpdateNickNamePresenter.dettachActivity();
     }
+
+
 }

@@ -98,6 +98,7 @@ public class SearchFragment extends Fragment implements SearchContract.SearchVie
         context = getActivity();
         historySearchVals.add("当归");
         historySearchVals.add("枸杞");
+
         historySearchTagAdapter= new TagAdapter<String>(historySearchVals) {
             @Override
             public View getView(FlowLayout parent, int position, String s) {
@@ -138,7 +139,6 @@ public class SearchFragment extends Fragment implements SearchContract.SearchVie
         searchItemAdapter=new SearchItemAdapter(getActivity());
         easyRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         easyRecyclerView.setAdapter(searchItemAdapter);
-
         easyRecyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

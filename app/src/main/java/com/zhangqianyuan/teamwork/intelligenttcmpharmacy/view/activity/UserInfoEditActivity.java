@@ -1,12 +1,9 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,16 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.squareup.picasso.Picasso;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.GlideImageLoader;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ToActivityUtil;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.PersonFragment;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.CircleImageView;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,10 +35,8 @@ import cn.finalteam.galleryfinal.BuildConfig;
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
-import cn.finalteam.galleryfinal.ImageLoader;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
-import cn.finalteam.galleryfinal.widget.GFImageView;
 
 /**
  * Description:
@@ -63,9 +60,6 @@ public class UserInfoEditActivity extends AppCompatActivity {
     @BindView(R.id.nick_phonenumber)
     EditText  phonenumber;
 
-    @BindView(R.id.nick_email)
-    EditText email;
-
     @BindView(R.id.finish_bt)
     Button  finish;
 
@@ -86,14 +80,15 @@ public class UserInfoEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userinfo_edit);
         ButterKnife.bind(this);
-        shar = getSharedPreferences("users",MODE_PRIVATE);
+        shar = getSharedPreferences("user",MODE_PRIVATE);
         editor  = shar.edit();
+        PersonFragment.getBitmapFromUrl(shar.getString("userpic",null),mUserImage,this);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editor.putString("nickid",nick_id.getText().toString());
-                editor.putString("nickname",mUserName.getText().toString());
-                editor.putString("phonenumber",phonenumber.getText().toString());
+                editor.putString("userphone",nick_id.getText().toString());
+                editor.putString("username",mUserName.getText().toString());
+                editor.putString("userphone",phonenumber.getText().toString());
                 editor.commit();
                 finish();
             }
@@ -107,6 +102,7 @@ public class UserInfoEditActivity extends AppCompatActivity {
     }
 
     public void initViews() {
+
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -114,10 +110,9 @@ public class UserInfoEditActivity extends AppCompatActivity {
         mToolbar.setTitleTextColor(Color.WHITE);
         //最开始设置姓名编辑光标不现实
         mUserName.setCursorVisible(false);
-        mUserName.setText(shar.getString("nickname",null));
-        nick_id.setText(shar.getString("phone",null));
-        phonenumber.setText(shar.getString("phone",null));
-        email.setText("点击设置");
+        mUserName.setText(shar.getString("username",null));
+        nick_id.setText(shar.getString("userphone",null));
+        phonenumber.setText(shar.getString("userphone",null));
     }
 
     @Override
@@ -133,7 +128,7 @@ public class UserInfoEditActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick({R.id.head_relative, R.id.name_relative, R.id.log_off, R.id.password_relative,R.id.medical_date_setting_relative, R.id.finish_bt})
+    @OnClick({R.id.head_relative, R.id.name_relative, R.id.log_off, R.id.password_relative, R.id.finish_bt})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.head_relative: {
@@ -143,10 +138,10 @@ public class UserInfoEditActivity extends AppCompatActivity {
             case R.id.name_relative:
                 mUserName.setCursorVisible(true);
                 mUserName.requestFocus();
+                ToActivityUtil.toNextActivity(this,UpdateNickNameActivity.class);
                 break;
             case R.id.password_relative:
-//                mUserName.setCursorVisible(false);
-//                ToActivityUtil.toNextActivity(this, PasswordEditActivity.class);
+                ToActivityUtil.toNextActivity(this,UpdatePassWordsActivity.class);
                 break;
             case R.id.finish_bt:
 //                mUserName.setCursorVisible(false);
@@ -159,9 +154,7 @@ public class UserInfoEditActivity extends AppCompatActivity {
 //                }
 //                mPresenter.changUserName(IdUtil.getIdString(),newName);
                 break;
-            case R.id.medical_date_setting_relative:
-//                ToActivityUtil.toNextActivity(this,MedicalDateSettingActivity.class);
-                break;
+
             case R.id.log_off:
 //                mUserName.setCursorVisible(false);
 //                DbUtil.getDaosession().getUserDao().deleteAll();
@@ -227,4 +220,10 @@ public class UserInfoEditActivity extends AppCompatActivity {
             FancyToast.makeText(UserInfoEditActivity.this,errorMsg,FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mUserName.setText(shar.getString("username",null));
+    }
 }

@@ -3,6 +3,8 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.GetUserPictureBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.BaseView;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -16,7 +18,7 @@ import retrofit2.Callback;
 public interface GetUserPictureContract {
     @FunctionalInterface
     interface GetUserPicView extends BaseView{
-        void isRight (boolean result,String reason,String picUrl);
+        void isRight (boolean result,String reason,String picUrl) throws IOException;
     }
 
     @FunctionalInterface

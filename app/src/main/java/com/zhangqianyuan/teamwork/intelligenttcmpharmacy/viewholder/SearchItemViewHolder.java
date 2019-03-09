@@ -17,7 +17,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SearchItemViewHolder extends BaseViewHolder<Medicine> {
     public SearchItemViewHolder(ViewGroup parent) {
         super(parent, R.layout.search_recyclerview_item);
-    }
+}
 
     @Override
     public void setData(Medicine data) {

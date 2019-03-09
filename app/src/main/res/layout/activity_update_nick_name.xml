@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.activity.UpdateNickName">
+    tools:context=".view.activity.UpdateNickNameActivity">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -67,6 +67,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/new_nickname_input"
             android:layout_toEndOf="@+id/new_nickname"
             android:textColor="@color/primary_text"
             android:layout_margin="8dp"
