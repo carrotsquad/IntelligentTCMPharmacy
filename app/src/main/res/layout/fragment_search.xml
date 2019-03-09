@@ -44,21 +44,6 @@
             android:layout_marginHorizontal="14dp"
             app:max_select="10"></com.zhy.view.flowlayout.TagFlowLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="14dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="搜索发现"
-            android:textSize="20sp" />
-
-        <com.zhy.view.flowlayout.TagFlowLayout
-            android:id="@+id/findflowlayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="14dp"
-            app:max_select="10"></com.zhy.view.flowlayout.TagFlowLayout>
 
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/erv"

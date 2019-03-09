@@ -60,9 +60,6 @@ public class SearchFragment extends Fragment implements SearchContract.SearchVie
     @BindView(R.id.flowlayout)
     TagFlowLayout historySearchTagFlowLayout;
 
-    @BindView(R.id.findflowlayout)
-    TagFlowLayout findTagFlowLayout;
-
     @BindView(R.id.erv)
     EasyRecyclerView easyRecyclerView;
 
@@ -134,17 +131,11 @@ public class SearchFragment extends Fragment implements SearchContract.SearchVie
 
     private void initView() {
         ButterKnife.bind(this, view);
-        //TODO:easyRecyclerView不显示
         searchItemAdapter=new SearchItemAdapter(getActivity());
         easyRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         easyRecyclerView.setAdapter(searchItemAdapter);
+        easyRecyclerView.setRefreshing(false);
 
-        easyRecyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-        });
         //TODO:待完善
         searchItemAdapter.setOnItemClickListener(position->{
 
@@ -169,18 +160,10 @@ public class SearchFragment extends Fragment implements SearchContract.SearchVie
             }
         });
 
-        findTagFlowLayout.setAdapter(findSearchTagAdapter);
-
-        findTagFlowLayout.setOnTagClickListener((View v, int position, FlowLayout parent)-> {
-            return false;
-        });
-
-
         historySearchTagFlowLayout.setAdapter(historySearchTagAdapter);
-
-        //TODO:待完善
         historySearchTagFlowLayout.setOnTagClickListener((View v, int position, FlowLayout parent)-> {
-                return false;
+
+            return false;
             });
         searchPresenter.getSearchResult();
     }
