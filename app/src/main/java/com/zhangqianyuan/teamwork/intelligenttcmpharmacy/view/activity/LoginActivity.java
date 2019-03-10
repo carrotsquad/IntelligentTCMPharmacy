@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements LogInContract.Lo
     public static final String USER_PHONE = "userphone";
     public static final String USER_PASSWORD = "userpassword";
     public static final String USER_NAME = "username";
+    public static final String USER_HISTORYSEARCH="userhistorysearch";
 
     private LogInPresenter logInPresenter;
     private String pwd = "";

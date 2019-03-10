@@ -17,7 +17,6 @@ public class SearchItemViewHolder extends BaseViewHolder<Medicine> {
 
     @Override
     public void setData(Medicine data) {
-        Log.e("SearchFragment", data.getIntro());
         TextView textView=itemView.findViewById(R.id.search_item_tv);
         textView.setText(data.getIntro().substring(0, 70) + "……");
         ImageView circleImageView=itemView.findViewById(R.id.img);
