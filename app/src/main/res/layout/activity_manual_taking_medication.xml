@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,21 +16,67 @@
         app:titleTextAppearance="@style/toolbar.TitleSize"
         app:titleTextColor="@android:color/white"
         />
-    <android.support.v7.widget.SearchView
-        android:id="@+id/self_take_med_search"
+    <LinearLayout
+        android:id="@+id/self_take_part1"
+        android:layout_below="@id/self_tack_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:background="@drawable/searchview_shape"
-        android:hint="搜索药材"
-        android:searchIcon="@drawable/search_icon_red"
-        android:textColorHint="#B6BAB9"
-        android:textSize="14sp"
-        app:queryHint="请输入搜索内容">
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/disease_input"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginTop="10dp"
+           android:layout_marginBottom="10dp"
+            android:background="@drawable/searchview_shape"
+            android:textColorHint="@color/black"
+            android:hint="请输入病症"
+            android:paddingStart="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="48dp" />
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/ic_add"
+            android:layout_weight="0.5"
+            android:id="@+id/self_take_med_more"
+            android:layout_width="0dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
 
-    </android.support.v7.widget.SearchView>
+  <LinearLayout
+      android:layout_below="@id/self_take_part1"
+      android:layout_marginTop="20dp"
+      android:layout_width="match_parent"
+      android:orientation="vertical"
+      android:layout_height="wrap_content">
+      <ScrollView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:fillViewport="true"
+          android:scrollbars="none"
+          >
+              <LinearLayout
+                  android:id="@+id/MyTable"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="9dp"
+                  android:orientation="vertical">
+              </LinearLayout>
 
+      </ScrollView>
 
+  </LinearLayout>
 
-
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/self_take_floatbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="5dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_ok"
+        />
+</RelativeLayout>

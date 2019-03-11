@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/drugandweight_shape"
+    android:layout_margin="5dp"
+    >
+
+    <!--输入药方的编号-->
+    <TextView
+        android:id="@+id/self_take_med_no"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:text="1."
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="15dp"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:id="@+id/self_take_drugname_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/self_take_drugname"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="9dp"
+        android:layout_toEndOf="@id/self_take_med_no"
+        android:text="中药名:"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/self_take_drugweight_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/self_take_drugname_info"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="9dp"
+        android:layout_alignEnd="@id/self_take_drugname_info"
+        android:layout_toEndOf="@id/self_take_med_no"
+        android:gravity="end"
+        android:text="重量:"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <!--输入药方的名字，由用户输入-->
+    <EditText
+        android:id="@+id/self_take_drugname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-1dp"
+        android:layout_toEndOf="@id/self_take_drugname_info"
+        android:ellipsize="end"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
+    <!--输入药方的重量，由用户输入-->
+    <EditText
+        android:id="@+id/self_take_drugweight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/self_take_drugname"
+       android:layout_toEndOf="@id/self_take_drugweight_info"
+
+        android:layout_marginTop="-14dp"
+        android:layout_marginEnd="0dp"
+        android:ellipsize="end"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <!--分隔符-->
+    <View
+        android:layout_below="@id/self_take_drugweight"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+</RelativeLayout>
