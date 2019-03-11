@@ -5,6 +5,8 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.SelfTakeMedBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.interfaces.BaseView;
 
 import java.util.List;
+
+import okhttp3.RequestBody;
 import retrofit2.Callback;
 
 /**
@@ -29,7 +31,7 @@ public interface GetPrescriptionSelfContract {
 
     @FunctionalInterface
     interface  GetPrescriptionSelfModel{
-        void GetPrescriptionSelf(String lable, boolean flag, List<DrugAndWeight> list, Callback<SelfTakeMedBean> callback);
+        void GetPrescriptionSelf(String lable, boolean flag, List<DrugAndWeight>   list, Callback<SelfTakeMedBean> callback);
     }
 }
 

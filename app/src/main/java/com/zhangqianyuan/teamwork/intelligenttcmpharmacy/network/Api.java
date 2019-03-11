@@ -2,6 +2,7 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network;
 
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugAndWeight;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugSearchBean;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.GetPrescriptionAUTOBackBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.GetUserPictureBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.RegisterOrLogInFeedbackBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.SelfTakeMedBean;
@@ -10,12 +11,15 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.UpdateNickNameorPa
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Description: 网络api
@@ -57,7 +61,10 @@ public interface Api {
 
     @POST("/autoMedicine/getPrescriptionSelf")
     @FormUrlEncoded
-    Call<SelfTakeMedBean>  getPrescriptionSelf(@Field("label") String label, @Field("flag") boolean flag, @Field("prescription")List<DrugAndWeight> list);
+    Call<SelfTakeMedBean>  getPrescriptionSelf(@Field("label") String label, @Field("flag") boolean flag, @Field("prescription") List<DrugAndWeight> list);
 
+    @POST("/autoMedicine/getPrescriptionAUTO")
+    @FormUrlEncoded
+    Call<GetPrescriptionAUTOBackBean> getPrescriptionAuto(@Field("disease") String disease);
 
 }

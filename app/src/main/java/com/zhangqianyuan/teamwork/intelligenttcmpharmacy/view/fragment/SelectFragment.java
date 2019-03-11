@@ -19,6 +19,7 @@ import com.youth.banner.Banner;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.LocalImageLoader;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ToActivityUtil;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.GetPrescriptionAUTOActivity;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.ManualTakingMedicationActivity;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,8 +108,7 @@ public class SelectFragment extends Fragment {
                 ToActivityUtil.toNextActivity(getActivity(),ManualTakingMedicationActivity.class);
                 break;
             case R.id.treat_bt:
-                Intent intent1 = new Intent(context, ManualTakingMedicationActivity.class);
-                startActivity(intent1);
+                ToActivityUtil.toNextActivity(getActivity(), GetPrescriptionAUTOActivity.class);
                 break;
             default: {
                 break;

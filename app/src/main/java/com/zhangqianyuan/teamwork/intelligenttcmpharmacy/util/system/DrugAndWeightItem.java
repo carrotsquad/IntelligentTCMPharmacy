@@ -1,7 +1,6 @@
 package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -24,7 +23,7 @@ public class DrugAndWeightItem extends RelativeLayout {
 
     public DrugAndWeightItem(Context context){
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.drugandweight_item,this);
+        LayoutInflater.from(context).inflate(R.layout.drugandweight_item_input,this);
         no = findViewById(R.id.self_take_med_no);
         name = findViewById(R.id.self_take_drugname);
         weight = findViewById(R.id.self_take_drugweight);

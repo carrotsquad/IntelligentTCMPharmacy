@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugAndWeight;
@@ -35,6 +36,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 手动取药界面
@@ -86,12 +89,13 @@ public class ManualTakingMedicationActivity extends AppCompatActivity implements
     //获得一个drugAndWeight列表
     public List<DrugAndWeight> getDrugAndWeightList(List<String> n, List<String> w) {
         List<DrugAndWeight> prescription = new ArrayList<>();
-        for (int i = 0;!n.get(i).equals("");i++){
+       for (int i=0;i<n.size();i++){
             DrugAndWeight drugAndWeight = new DrugAndWeight();
             drugAndWeight.setMedicineName(n.get(i));
             drugAndWeight.setWeight(Integer.parseInt(w.get(i)));
             prescription.add(drugAndWeight);
         }
+
         return prescription;
     }
 
@@ -102,7 +106,7 @@ public class ManualTakingMedicationActivity extends AppCompatActivity implements
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                Log.d(T,"1"+items.get(0).getWeight().getText().toString()+"  "+items.get(0).getName().getText().toString());
+
 //                for (int i=0;i<items.size();i++) {
 //                    name.add(items.get(i).getName().getText().toString());
 //                    weight.add(items.get(i).getWeight().getText().toString());
@@ -119,7 +123,7 @@ public class ManualTakingMedicationActivity extends AppCompatActivity implements
                 Toast.makeText(ManualTakingMedicationActivity.this, "病症输入为空", Toast.LENGTH_SHORT)
                         .show(); }
                 else{
-                presenter.GetPrescriptionSelf(disease.getText().toString(), true, getDrugAndWeightList(name, weight));
+                presenter.GetPrescriptionSelf(disease.getText().toString(), true, getDrugAndWeightList(name,weight));
             }
         }
   });

@@ -12,6 +12,7 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.base.BasePres
 
 import java.util.List;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,16 +38,17 @@ public class GetPrescriptionSelfPresenter extends BasePresenter<GetPrescriptionS
 
 
     @Override
-    public void GetPrescriptionSelf(String lable, boolean flag, List<DrugAndWeight> list) {
+    public void GetPrescriptionSelf(String lable, boolean flag, List<DrugAndWeight>   list) {
         if (isAttachActivity()){
             model.GetPrescriptionSelf(lable, flag, list, new Callback<SelfTakeMedBean>() {
                 @Override
                 public void onResponse(Call<SelfTakeMedBean> call, Response<SelfTakeMedBean> response) {
-                    if (!response.body().equals("")){
+                    if (response.body()!=null){
                         v.isRightAndReturnInfo(response.body().isResult(),response.body().getReason(),response.body().getPrescriptionId(),
                                 response.body().getPrice(),response.body().getInfor());
                         Log.d(T,"成功了"+response.body());
-                    }
+                    }else
+                        Log.d(T,"失败了"+response.body());
                 }
 
                 @Override
