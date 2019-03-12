@@ -26,6 +26,7 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.GetUserPicture
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.GetUserPicPresenter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ToActivityUtil;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.AboutUsActivity;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.RecordOfPrescriptionActivity;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.UserInfoEditActivity;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.CircleImageView;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.MaskableImageView;
@@ -95,12 +96,13 @@ public class PersonFragment extends Fragment implements View.OnClickListener,Get
     }
 
     private void initView(){
-        mPresribeBt = view.findViewById(R.id.prescribe_bt);
+        mPresribeBt = view.findViewById(R.id.presribe_bt_record);
         mCautionBt = view.findViewById(R.id.caution_bt);
         mAboutUsBt = view.findViewById(R.id.about_us_bt);
         mTreatRecordBt = view.findViewById(R.id.treat_record_bt);
         userImage = view.findViewById(R.id.user_image);
         userName = view.findViewById(R.id.user_name);
+        mPresribeBt.setOnClickListener(this);
         mCautionBt.setOnClickListener(this);
         mCautionBt.setOnClickListener(this);
         mAboutUsBt.setOnClickListener(this);
@@ -117,9 +119,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener,Get
                 break;
             }
             /* 取药记录 */
-            case R.id.presribe_bt:
-
+            case R.id.presribe_bt_record:{
+                ToActivityUtil.toNextActivity(context, RecordOfPrescriptionActivity.class);
                 break;
+            }
             /* 关于我们 */
             case R.id.about_us_bt:{
                 ToActivityUtil.toNextActivity(context, AboutUsActivity.class);

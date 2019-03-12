@@ -34,7 +34,8 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.GetPrescriptionAUTOActivity"></activity>
+        <activity android:name=".view.activity.RecordOfPrescriptionActivity"></activity>
+        <activity android:name=".view.activity.GetPrescriptionAUTOActivity" />
         <activity android:name=".view.activity.MainActivity" />
         <activity android:name=".view.activity.UserInfoEditActivity" />
         <activity android:name=".view.activity.AboutUsActivity">
@@ -65,7 +66,7 @@
         <activity
             android:name=".view.activity.ManualTakingMedicationActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/noActionBar2"></activity>
+            android:theme="@style/noActionBar2" />
     </application>
 
 </manifest>

@@ -3,18 +3,22 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.adapter.GetPrescriptionAutoAdapter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugAndWeight;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugAndWeightAndCount;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.GetPrescriptionAUTOContract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.GetPrescriptionAUTOPrensenter;
 
@@ -34,12 +38,19 @@ public class GetPrescriptionAUTOActivity extends AppCompatActivity implements  G
 
     @BindView(R.id.getprescritionauto_easyrecycle)
     EasyRecyclerView rec;
+
+    @BindView(R.id.getprescritionauto_price)
+    TextView priceView;
+
+    @BindView(R.id.getprescritionauto_float)
+    FloatingActionButton ok;
     private static final String T = "GetPrescriptionAUTO";
 
     private GetPrescriptionAUTOPrensenter presenter;
     private GetPrescriptionAutoAdapter adapter;
     //recycleviewitem 数据集合
-    private List<DrugAndWeight> Druglist = new ArrayList<>();
+    private ArrayList<DrugAndWeightAndCount> d = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +90,13 @@ public class GetPrescriptionAUTOActivity extends AppCompatActivity implements  G
                 return false;
             }
         });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -86,10 +104,26 @@ public class GetPrescriptionAUTOActivity extends AppCompatActivity implements  G
     public void isRightAndGetInfo(boolean result, List<DrugAndWeight> list, int prescriptionId, double price) {
         if (result){
             if (list!=null){
-            Druglist.addAll(list);
-                Log.d(T,"hahah"+Druglist.get(0).toString());
-            adapter.addAll(Druglist);
-            adapter.notifyDataSetChanged();
+                d.clear();
+                list.forEach(e->{
+                    DrugAndWeightAndCount haha = new DrugAndWeightAndCount();
+                    haha.setMedicineName(e.getMedicineName());
+                    haha.setWeight(e.getWeight());
+                    haha.setCount(list.indexOf(e)+1);
+                    d.add(haha);
+                });
+                Log.d(T," "+d.get(0).getWeight());
+                String p = "价格："+String.valueOf(price)+" 元";
+                priceView.setText(p);
+                if (d!=null){
+                    adapter.clear();
+                    adapter.addAll(d);
+                    adapter.notifyDataSetChanged();
+                }}}
+          else{
+              adapter.clear();
+              adapter.notifyDataSetChanged();
+                }
         }
-    }}
-}
+    }
+

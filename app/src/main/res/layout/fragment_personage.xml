@@ -57,7 +57,7 @@
         android:background="@color/white">
 
         <com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.MaskableImageView
-            android:id="@+id/presribe_bt"
+            android:id="@+id/presribe_bt_record"
             android:layout_width="150dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -78,7 +78,7 @@
             app:layout_constraintDimensionRatio="3:2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/about_us_bt"
-            app:layout_constraintTop_toBottomOf="@+id/presribe_bt" />
+            app:layout_constraintTop_toBottomOf="@+id/presribe_bt_record" />
 
         <com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.MaskableImageView
             android:id="@+id/about_us_bt"
@@ -100,7 +100,7 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/user_information"
             app:layout_constraintDimensionRatio="3:2"
-            app:layout_constraintLeft_toRightOf="@+id/presribe_bt"
+            app:layout_constraintLeft_toRightOf="@+id/presribe_bt_record"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

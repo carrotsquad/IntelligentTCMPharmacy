@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugAndWeight;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugAndWeightAndCount;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.viewholder.DrugAndWeightItemViewHolder;
 
 /**
@@ -16,11 +17,12 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.viewholder.DrugAndWeigh
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-public class GetPrescriptionAutoAdapter extends RecyclerArrayAdapter<DrugAndWeight> {
+public class GetPrescriptionAutoAdapter extends RecyclerArrayAdapter<DrugAndWeightAndCount> {
 
     public GetPrescriptionAutoAdapter(Context context){
         super(context);
     }
+
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         return new DrugAndWeightItemViewHolder(parent);
