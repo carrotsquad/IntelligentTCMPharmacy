@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.adapter.MainViewAdapter;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.PersonFragment;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.SearchFragment;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.SelectFragment;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);
+        ActivityManager.getActivityManager().add(this);
         ButterKnife.bind(this);
         initView();
         initPermission();

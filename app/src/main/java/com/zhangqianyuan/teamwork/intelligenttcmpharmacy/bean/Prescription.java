@@ -20,7 +20,7 @@ public class Prescription {
 
     //药+质量 序列
     private List<DrugAndWeight> prescription ;
-    private String price;
+    private double price;
     private String time;
 
     public List<DrugAndWeight> getPrescription() {
@@ -31,11 +31,11 @@ public class Prescription {
         this.prescription = prescription;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

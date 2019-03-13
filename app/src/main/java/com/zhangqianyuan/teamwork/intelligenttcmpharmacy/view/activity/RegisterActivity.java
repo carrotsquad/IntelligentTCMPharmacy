@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.RegisterContract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.RegisterPresenter;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 
 import java.util.Observer;
 import java.util.TimerTask;
@@ -72,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+        ActivityManager.getActivityManager().add(this);
         sharedPreferences = getSharedPreferences("users", MODE_PRIVATE);
         mEditor = sharedPreferences.edit();
         presenter = new RegisterPresenter();

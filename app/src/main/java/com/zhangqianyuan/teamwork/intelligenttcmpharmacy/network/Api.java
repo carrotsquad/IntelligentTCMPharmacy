@@ -3,6 +3,7 @@ package com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugAndWeight;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugSearchBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.GetPrescriptionAUTOBackBean;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.GetPrescriptionSureFeedBackBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.GetUserPictureBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.Prescription;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.RecordOfTakingMadecine;
@@ -72,5 +73,9 @@ public interface Api {
     @POST("/autoMedicine/getPrescriptionHistory")
     @FormUrlEncoded
     Call<RecordOfTakingMadecine>   getRecordOfPrescription(@Field("tele") String tele);
+
+    @POST("/autoMedicine/getPrescriptionSure")
+    @FormUrlEncoded
+    Call<GetPrescriptionSureFeedBackBean> getPrescriptionSure(@Field("tele") String tele,@Field("addressId") int id,@Field("prescriptionId") int pId);
 
 }

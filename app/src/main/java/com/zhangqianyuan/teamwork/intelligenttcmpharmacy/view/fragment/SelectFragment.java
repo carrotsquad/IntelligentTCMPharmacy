@@ -18,6 +18,7 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.youth.banner.Banner;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.LocalImageLoader;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ToActivityUtil;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.GetPrescriptionAUTOActivity;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.ManualTakingMedicationActivity;
@@ -52,6 +53,7 @@ public class SelectFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_select, null);
         ButterKnife.bind(this, view);
+        ActivityManager.getActivityManager().addF(this);
         context = getContext();
         initView();
         return view;

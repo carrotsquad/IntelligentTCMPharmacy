@@ -31,6 +31,7 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugSearchBean;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.Medicine;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.SearchContract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.MedicineSearchPresenter;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -96,6 +97,7 @@ public class SearchFragment extends Fragment implements SearchContract.SearchVie
         view = inflater.inflate(R.layout.fragment_search, null);
         context = getActivity();
         sharedPreferences = getActivity().getSharedPreferences("user", MODE_PRIVATE);
+        ActivityManager.getActivityManager().addF(this);
         historylist = sharedPreferences.getString(USER_HISTORYSEARCH, "").split(" ");
         historySearchTagAdapter = new TagAdapter<String>(historylist) {
             @Override

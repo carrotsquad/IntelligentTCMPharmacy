@@ -17,6 +17,7 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.UpdateNickNameorPa
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.UpdateNickNameContract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.network.Api;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.UpdateNickNamePresenter;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +52,7 @@ public class UpdateNickNameActivity extends AppCompatActivity implements UpdateN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_nick_name);
         ButterKnife.bind(this);
+        ActivityManager.getActivityManager().add(this);
         initView();
         mUpdateNickNamePresenter = new UpdateNickNamePresenter();
         mUpdateNickNamePresenter.attachActivty(this);

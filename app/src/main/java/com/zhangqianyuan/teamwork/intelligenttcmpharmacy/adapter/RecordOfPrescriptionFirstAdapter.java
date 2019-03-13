@@ -16,9 +16,9 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.viewholder.RecordOfPres
  * @updateAuthor $Author$
  * @updateDes ${TODO}
  */
-public class RecordOfPrescriptionAdapter extends RecyclerArrayAdapter<String> {
+public class RecordOfPrescriptionFirstAdapter extends RecyclerArrayAdapter<String> {
 
-    public RecordOfPrescriptionAdapter(Context context){
+    public RecordOfPrescriptionFirstAdapter(Context context){
         super(context);
     }
     @Override

@@ -27,6 +27,7 @@ import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.bean.DrugAndWeight;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.GetPrescriptionSelfContract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.GetPrescriptionSelfPresenter;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.MedicineSearchPresenter;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.DrugAndWeightItem;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.PersonFragment;
 
@@ -68,6 +69,7 @@ public class ManualTakingMedicationActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_taking_medication);
         ButterKnife.bind(this);
+        ActivityManager.getActivityManager().add(this);
         setSupportActionBar(mToolbar);
         presenter = new GetPrescriptionSelfPresenter();
         presenter.attachActivty(this);

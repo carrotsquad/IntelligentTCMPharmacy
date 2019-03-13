@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.LogInContract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.LogInPresenter;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,9 +58,11 @@ public class LoginActivity extends AppCompatActivity implements LogInContract.Lo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ActivityManager.getActivityManager().add(this);
         ButterKnife.bind(this);
         logInPresenter = new LogInPresenter();
         logInPresenter.attachActivty(this);
+        Log.d("fuck if ","hahahhaha");
         sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
         if ("".equals(sharedPreferences.getString(USER_PHONE, "")) || "".equals(sharedPreferences.getString(USER_PASSWORD, ""))) {
 

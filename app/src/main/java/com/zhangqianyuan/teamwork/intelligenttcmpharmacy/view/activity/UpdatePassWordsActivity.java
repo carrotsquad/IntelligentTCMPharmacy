@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.UpdatePassWordContract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.UpdatePassWordPresenter;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +49,7 @@ public class UpdatePassWordsActivity extends AppCompatActivity implements Update
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_pass_words);
         ButterKnife.bind(this);
+        ActivityManager.getActivityManager().add(this);
         initView();
     }
 

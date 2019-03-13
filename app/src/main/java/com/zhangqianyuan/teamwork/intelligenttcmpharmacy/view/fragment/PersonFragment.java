@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.contract.GetUserPictureContract;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.presenter.GetUserPicPresenter;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ToActivityUtil;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.AboutUsActivity;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.activity.RecordOfPrescriptionActivity;
@@ -75,6 +76,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener,Get
         view = inflater.inflate(R.layout.fragment_personage, container, false);
         initView();
         shar = getActivity().getSharedPreferences("user",Context.MODE_PRIVATE);
+        ActivityManager.getActivityManager().addF(this);
         mEditor = shar.edit();
         userName.setText(shar.getString("username",null));
         context = getContext();

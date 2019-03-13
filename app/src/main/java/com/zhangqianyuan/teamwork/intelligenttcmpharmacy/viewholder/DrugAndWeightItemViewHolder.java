@@ -32,4 +32,6 @@ public class DrugAndWeightItemViewHolder extends BaseViewHolder<DrugAndWeightAnd
         String wei = String.valueOf(data.getWeight());
         weight.setText(wei);
     }
+
+
 }

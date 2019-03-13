@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical">
+    <TextView
+        android:textSize="20sp"
+        android:id="@+id/prescription_pup_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#00000000"
+        android:drawableStart="@drawable/ic_left_black"
+        android:gravity="center"
+        android:text="返回" />
+
+    <View
+        android:layout_marginHorizontal="10dp"
+        android:background="#ef5350"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:layout_marginTop="10dp"
+        android:id="@+id/prescription_pup_easy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:id="@+id/prescription_pup_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_marginHorizontal="10dp"
+        android:background="#ef5350"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:textColor="@color/white"
+            android:background="#ef5350"
+            android:id="@+id/prescription_pup_cancle"
+            android:text="取消"
+            android:layout_marginStart="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:textColor="@color/white"
+            android:background="#ef5350"
+            android:id="@+id/prescription_pup_ok"
+            android:text="确定"
+            android:layout_marginStart="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

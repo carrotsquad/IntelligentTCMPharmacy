@@ -18,6 +18,7 @@ import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.R;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.image.GlideImageLoader;
+import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ActivityManager;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.util.system.ToActivityUtil;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.view.fragment.PersonFragment;
 import com.zhangqianyuan.teamwork.intelligenttcmpharmacy.widget.CircleImageView;
@@ -80,6 +81,7 @@ public class UserInfoEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userinfo_edit);
         ButterKnife.bind(this);
+        ActivityManager.getActivityManager().add(this);
         shar = getSharedPreferences("user",MODE_PRIVATE);
         editor  = shar.edit();
         PersonFragment.getBitmapFromUrl(shar.getString("userpic",null),mUserImage,this);
@@ -144,33 +146,14 @@ public class UserInfoEditActivity extends AppCompatActivity {
                 ToActivityUtil.toNextActivity(this,UpdatePassWordsActivity.class);
                 break;
             case R.id.finish_bt:
-//                mUserName.setCursorVisible(false);
-//                //进行头像和姓名修改等上传
-//                String changName = mUserName.getText().toString();
-//                String newName = EncodeUtil.doEncrypt(changName, ResponseCons.KEY_NAME);
-//                if (changName == null || changName.equals("")){
-//                    ToastUtils.showToast(this,"暂未进行修改呢");
-//                    return;
-//                }
-//                mPresenter.changUserName(IdUtil.getIdString(),newName);
+                finish();
                 break;
 
             case R.id.log_off:
-//                mUserName.setCursorVisible(false);
-//                DbUtil.getDaosession().getUserDao().deleteAll();
-//                DbUtil.getDaosession().getMedicalDateInfoDao().deleteAll();
-//                DbUtil.getDaosession().getDateDao().deleteAll();
-//                DbUtil.getDaosession().getMedicalListDao().deleteAll();
-//                ToActivityUtil.toNextActivity(this, LoginActivity.class);
-//                ActivityStack.getScreenManager().clearAllActivity();
-//                SharedPreferences preferences =getSharedPreferences("isConnect",MODE_PRIVATE);
-//                SharedPreferences.Editor editor = preferences.edit();
-//                editor.clear();
-//                editor.commit();
-                startActivity(new Intent(UserInfoEditActivity.this,LoginActivity.class));
-                finish();
-                //同时进行一些数据清除，如数据库的清理
-                //同时进行一些数据清除，如数据库的清理
+                editor.clear();
+                ToActivityUtil.toNextActivityAndFinish(UserInfoEditActivity.this,LoginActivity.class);
+                ActivityManager.getActivityManager().removeAll();
+                ActivityManager.getActivityManager().removeFAll();
                 break;
                 default:{
                     break;
